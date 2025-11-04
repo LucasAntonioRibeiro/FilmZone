@@ -1,0 +1,117 @@
+body {
+    background-color: black;
+}
+
+.menu-bg {
+    background: rgb(0, 0, 0);
+    margin-right: -9px;
+    margin-left: -9px;
+}
+
+.menu {
+    max-width: 960px;
+    margin: -10px auto;
+    margin-right: -9px;
+    margin-left: -9px;
+    padding: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu a {
+    color: black;
+}
+
+.menu-logo a {
+    font-size: 2.25em;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.menu-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.menu-nav a {
+    font-size: 1.25em;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.menu-nav a:hover {
+    color: red;
+}
+
+/*TOP fimes de 2025*/
+h1 {
+    color: white;
+}
+.atual {
+    display: flex;
+    overflow-x: auto;
+    margin-top: -30px;
+    margin-left: -15px;
+    gap: 15px;
+    padding: 20px;
+    scroll-behavior: smooth;
+}
+
+.atual::-webkit-scrollbar {
+    height: 8px;
+}
+
+.atual::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.atual img {
+    height: 250px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.atual img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/*Top filmes da hsitoria*/
+
+.historia {
+    display: flex;
+    overflow-x: auto;
+    margin-top: -30px;
+    margin-left: -15px;
+    gap: 15px;
+    padding: 20px;
+    scroll-behavior: smooth;
+}
+
+.historia::-webkit-scrollbar {
+    height: 8px;
+}
+
+.historia::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.historia img {
+    height: 250px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.historia img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
