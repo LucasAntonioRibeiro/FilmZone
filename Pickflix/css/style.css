@@ -8,46 +8,64 @@ body {
     margin-left: -9px;
 }
 
-.menu {
-    max-width: 960px;
-    margin: -10px auto;
-    margin-right: -9px;
-    margin-left: -9px;
-    padding: 15px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+.slide {
+   height: 100%;
+   width: 180px;
+   position: absolute;
+   background-color: white;
+   transition: 0.5s ease;
 }
 
-.menu a {
-    color: black;
+.nav {
+    color: red;
+    font-weight: 800;
+    text-align: right;
+    padding: 10px 0;
+    padding-right: 30px;
+    pointer-events: none;
 }
 
-.menu-logo a {
-    font-size: 2.25em;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
-.menu-nav ul {
-    display: flex;
-    flex-wrap: wrap;
+ul li {
     list-style: none;
 }
 
-.menu-nav a {
-    font-size: 1.25em;
+ul li a {
+    color: darkred;
+    font-weight: 500px;
+    padding: 5px 0;
     display: block;
-    padding: 10px;
+    text-transform: capitalize;
     text-decoration: none;
-    color: white;
+    transition: 0.2s ease-out;
 }
 
-.menu-nav a:hover {
-    color: red;
+input {
+    display: none;
+    visibility: hidden;
+    -webkit-appearance: none;
 }
 
+.toggle {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 20px;
+    left: 15px;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.toggle .comum {
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: purple;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
 /*TOP fimes de 2025*/
 h1 {
     color: white;
