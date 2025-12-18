@@ -1,0 +1,38 @@
+
+
+div {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 80px;
+    border-radius: 15px;
+    color: #fff;
+}
+
+input {
+    padding: 15px;
+    border: none;
+    outline: nome;
+    font-size: 15px;
+}
+
+button {
+    background-color:lightgray;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    color: black;
+    font-size: 15px;
+}
+
+body {
+    background: #101417
+}
+
+button:hover {
+    background-color: white;
+    cursor: pointer;
+}
