@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background: #17171c;
     margin: 0;
     padding: 20px;
 }
@@ -8,7 +8,7 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: #fff;
+    background: #211c1c;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
@@ -22,14 +22,27 @@ label {
     margin-top: 10px;
     display: block;
     font-weight: bold;
+    color: white;
 }
 
-input, textarea, select, button{
+input,
+textarea,
+select,
+button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    background-color: #2a2323;
+    border: 1px solid #3a2f2f;
+    color: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #e50914;
+    outline: none;
 }
 
 textarea {
@@ -38,15 +51,16 @@ textarea {
 
 button {
     margin-top: 20px;
-    background: #007bff;
-    color: white;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
     border: none;
     cursor: pointer;
     font-size: 16px;
 }
 
 button:hover {
-    background: #0056b3;
+      background-color: #b20710;
 }
 
 .poster-preview img {
@@ -71,10 +85,11 @@ button:hover {
 }
 
 @media (max-width:480px) {
-    .container{
+    .container {
         padding: 15px;
     }
-    h1{
+
+    h1 {
         font-size: 20px;
     }
 }

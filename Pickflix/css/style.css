@@ -5,7 +5,13 @@
     box-sizing: border-box;
 }
 
-c
+body {
+      background: #17171c;
+}
+
+h1 {
+      color:  white;
+}
 
 /* ===== HEADER ===== */
 nav {

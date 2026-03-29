@@ -1,7 +1,3 @@
-const posterInput = document.getElementById('poster');
-const posterImg = document.getElementById('posterImg');
-const resumo = document.getElementById('resumo');
-const contador = document.getElementById('contador');
 const form = document.getElementById('filmeForm');
 const sucesso = document.getElementById('sucesso');
 
@@ -13,29 +9,36 @@ const duracao = document.getElementById('duracao');
 const diretor = document.getElementById('diretor');
 const elenco = document.getElementById('elenco');
 const poster = document.getElementById('poster');
+const porterImg = document.getElementById('porterImg');
+const resumo = document.getElementById('resumo');
+const contador = document.getElementById('contador');
 const trailer = document.getElementById('trailer');
 const avaliacao = document.getElementById('avaliacao');
 
-// Pré-visualização do pôster
-posterInput.addEventListener('input', () => {
-  posterImg.src = posterInput.value;
-  posterImg.style.display = posterInput.value ? 'block' : 'none';
+// Previsualização do Poster
+
+poster.addEventListener('input', () => {
+  posterImg.src = poster.Value;
+  posterImg.style.display = poster.Value ? 'block' : 'nome';
 });
 
-// Contador de caracteres
+// Contador de caracter do resumo
+
 resumo.addEventListener('input', () => {
-  contador.textContent = `${resumo.value.length} / 500`;
+  contador.textContent = `${resumo.Value.length} / 500`;
 });
 
-// Envio do formulário
-form.addEventListener('submit', (e) => {
+
+// Envio do formulario
+
+form.addEventListener ('submit', (e) => {
   e.preventDefault();
 
-  const confirmar = confirm('Tem certeza que deseja cadastrar este filme?');
+  const confirmar = confirm('Deseja castrar este filme?');
   if (!confirmar) return;
 
-  if (!nome.value || !ano.value || !genero.value || !classificacao.value || !duracao.value) {
-    alert('Por favor, preencha todos os campos obrigatórios.');
+  if (!nome.Value || !ano.value || !genero.value || !classificacao.value || !duracao.value) {
+    alert('Preencha os campos obrigatórios!');
     return;
   }
 
@@ -57,12 +60,12 @@ form.addEventListener('submit', (e) => {
   filmes.push(filme);
   localStorage.setItem('filmes', JSON.stringify(filmes));
 
+  // Limpar formulário
   form.reset();
-
   posterImg.style.display = 'none';
   contador.textContent = '0 / 500';
 
+  // Mostrar sucesso
   sucesso.style.display = 'block';
-
   setTimeout(() => sucesso.style.display = 'none', 3000);
 });
