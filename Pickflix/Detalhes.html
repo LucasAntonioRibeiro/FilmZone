@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Filme</title>
+  <link rel="stylesheet" href="css/detalhe.css">
+</head>
+
+<body>
+
+  <header>
+                <nav>
+                        <a class="logo" href="/">FILMZONE</a>
+                        <div class="mobile-menu">
+                                <div class="line1"></div>
+                                <div class="line2"></div>
+                                <div class="line3"></div>
+                        </div>
+                        <ul class="nav-list">
+                                <li><a href="index.html">Início</a></li>
+                                <li><a href="Cadastro.html">Login</a></li>
+                                <li><a href="Filmes.html">cadastrar filmes</a></li>
+                                <li>Categorias</a></li>
+                        </ul>
+                </nav>
+        </header>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img id="poster" class="poster">
+    <div class="info">
+      <h1 id="titulo"></h1>
+      <p id="meta"></p>
+      <button id="btnTrailer">▶ Assistir Trailer</button>
+    </div>
+  </div>
+
+  <!-- RESUMO -->
+  <div class="secao">
+    <h2>Resumo</h2>
+    <p id="resumo"></p>
+  </div>
+
+  <!-- ELENCO -->
+  <div class="secao">
+    <h2>Elenco</h2>
+    <div id="elenco" class="tags"></div>
+  </div>
+
+  <!-- TRAILER -->
+  <div class="secao">
+    <h2>Trailer</h2>
+    <div id="trailer"></div>
+  </div>
+
+</div>
+
+<script src="js/detalhe.js"></script>
+</body>
+</html>

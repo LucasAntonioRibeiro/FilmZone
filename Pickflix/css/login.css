@@ -80,7 +80,8 @@ body {
 }
 .btn-second {
     background-color: white;
-    border: 1px solid white;
+    color: black ;
+    border: 1px solid black;
     transition: background-color .5s;
 }
 .btn-second:hover {
