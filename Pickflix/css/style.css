@@ -133,7 +133,7 @@ main {
 }
 
 /* ===== CARROSSEL ===== */
-.carrossel {
+.carrossel, .carrossel2, .carrossel3, .carrossel4 {
     display: flex;
     overflow-x: auto;
     gap: 15px;
@@ -145,7 +145,35 @@ main {
     height: 7px;
 }
 
+.carrossel2::-webkit-scrollbar {
+    height: 7px;
+}
+
+.carrossel3::-webkit-scrollbar {
+    height: 7px;
+}
+
+.carrossel4::-webkit-scrollbar {
+    height: 7px;
+}
+
 .carrossel::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+}
+
+
+.carrossel2::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+}
+
+.carrossel3::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+}
+
+.carrossel4::-webkit-scrollbar-thumb {
     background: #444;
     border-radius: 5px;
 }
@@ -156,11 +184,40 @@ main {
     transition: .3s;
 }
 
+
+.carrossel2 img {
+    height: 230px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.carrossel3 img {
+    height: 230px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.carrossel4 img {
+    height: 230px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
 .carrossel img:hover {
     transform: scale(1.08);
 }
 
+.carrossel2 img:hover {
+    transform: scale(1.08);
+}
 
+.carrossel3 img:hover {
+    transform: scale(1.08);
+}
+
+.carrossel4 img:hover {
+    transform: scale(1.08);
+}
 
 /* ===== RESPONSIVO ===== */
 @media (max-width: 600px) {
@@ -173,6 +230,18 @@ main {
     }
 
     .carrossel img {
+        height: 170px;
+    }
+
+    .carrossel2 img {
+        height: 170px;
+    }
+
+    .carrossel3 img {
+        height: 170px;
+    }
+
+    .carrossel4 img {
         height: 170px;
     }
 
