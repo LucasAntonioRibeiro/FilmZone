@@ -73,9 +73,16 @@ if (trailerInput) {
   trailerInput.addEventListener('input', () => {
     const url = trailerInput.value;
 
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
+    let videoId = '';
 
+    // 🔥 AQUI É A CORREÇÃO
+    if (url.includes('youtube.com/watch?v=')) {
+      videoId = url.split('v=')[1].split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    }
+
+    if (videoId) {
       previewTrailer.innerHTML = `<iframe width="100%" height="200"
         src="https://www.youtube.com/embed/${videoId}"
         frameborder="0"
@@ -86,29 +93,6 @@ if (trailerInput) {
   });
 }
 
-atorInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-
-    const nome = atorInput.value.trim();
-    if (!nome) return;
-
-    atores.push(nome);
-
-    const tag = document.createElement('span');
-    tag.textContent = nome;
-    tag.style.margin = '5px';
-    tag.style.padding = '5px 10px';
-    tag.style.background = '#007bff'
-    tag.style.color = '#fff'
-    tag.style.borderRadius = '20px';
-
-
-    listaAtores.appendChild(tag);
-
-    atorInput.value = '';
-  }
-})
 
 // Preview do pôster
 poster.addEventListener('input', () => {
@@ -132,7 +116,7 @@ form.addEventListener('submit', (e) => {
   const confirmar = confirm('Deseja cadastrar este filme?');
   if (!confirmar) return;
 
-  if (!nome.value || !ano.value || !genero.value || !classificacao.value || !horas.value | !minutos.value) {
+  if (!nome.value || !ano.value || !genero.value || !classificacao.value || !horas.value || !minutos.value) {
     alert('Preencha os campos obrigatórios!');
     return;
   }

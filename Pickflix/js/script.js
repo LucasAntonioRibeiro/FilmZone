@@ -60,7 +60,7 @@ filmes.forEach((filme, index) => {
   container.appendChild(img);
 });
 
-const carrossel = document.querySelector('.carrossel');
+const carrossel = document.querySelector('.carrossel2');
 
 const filme = JSON.parse(localStorage.getItem('filmes')) || [];
 
