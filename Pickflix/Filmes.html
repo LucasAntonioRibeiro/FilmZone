@@ -11,22 +11,22 @@
 <body>
 
     <header>
-                <nav>
-                        <a class="logo" href="/">FILMZONE</a>
-                        <div class="mobile-menu">
-                                <div class="line1"></div>
-                                <div class="line2"></div>
-                                <div class="line3"></div>
-                        </div>
-                        <ul class="nav-list">
-                                <li><a href="index.html">Início</a></li>
-                                <li><a href="Cadastro.html">Login</a></li>
-                                <li><a href="Filmes.html">cadastrar filmes</a></li>
-                                <li>Categorias</a></li>
-                        </ul>
-                </nav>
-        </header>
-        
+        <nav>
+            <a class="logo" href="/">FILMZONE</a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="Cadastro.html">Login</a></li>
+                <li><a href="Filmes.html">cadastrar filmes</a></li>
+                <li>Categorias</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
         <h1>Cadastro de Filme</h1>
 
@@ -66,10 +66,10 @@
 
             <label>Duração</label>
             <div class="tempo">
-            <input type="number" id="horas" placeholder="Horas" min="0">
-            <input type="number" id="minutos" placeholder="Minutos" min="0" max="59">
+                <input type="number" id="horas" placeholder="Horas" min="0">
+                <input type="number" id="minutos" placeholder="Minutos" min="0" max="59">
             </div>
-            
+
             <label>Diretor</label>
             <input type="text" id="diretor">
 
@@ -91,6 +91,9 @@
             <label>Trailer (Youtube)</label>
             <input type="url" id="trailerInput">
             <div id="previewTrailer"></div>
+
+            <label>Top 10 Bilheteria da História</label>
+            <input type="checkbox" id="topHistorico">
 
             <button type="submit">Cadastrar</button>
 

@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+      background: #17171c;
+}
+
+h1 {
+      color:  white;
+}
+
+/* ===== HEADER ===== */
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #23232e;
+    height: 8vh;
+}
+
+/* ===== MENU ===== */
+
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.logo {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  background: #23232e;
+  height: 8vh;
+}
+
+main {
+  background: url("bg.jpg") no-repeat center center;
+  background-size: cover;
+  height: 92vh;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-list li {
+  letter-spacing: 3px;
+  margin-left: 32px;
+}
+
+.mobile-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-menu div {
+  width: 32px;
+  height: 2px;
+  background: #fff;
+  margin: 8px;
+  transition: 0.3s;
+}
+
+@media (max-width: 999px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav-list {
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    width: 50vw;
+    height: 92vh;
+    background: #23232e;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in;
+  }
+  .nav-list li {
+    margin-left: 0;
+    opacity: 0;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}
+
+.nav-list.active {
+  transform: translateX(0);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu.active .line1 {
+  transform: rotate(-45deg) translate(-8px, 8px);
+}
+
+.mobile-menu.active .line2 {
+  opacity: 0;
+}
+
+.mobile-menu.active .line3 {
+  transform: rotate(45deg) translate(-5px, -7px);
+}
+
+/* ===== FORM CONTAINER ===== */
+.container {
+    max-width: 650px;
+    margin: auto;
+    background: #211c1c;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 1);
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+    text-align: center;
+    color: white;
+}
+
+/* ===== LABELS ===== */
+label {
+    margin-top: 12px;
+    display: block;
+    font-weight: bold;
+    color: white;
+}
+
+/* ===== INPUTS ===== */
+input,
+textarea,
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    background-color: #2a2323;
+    border: 1px solid #3a2f2f;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+/* ===== BOTÃO ===== */
+button {
+    margin-top: 20px;
+    background-color: #e50914;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #b20710;
+}
+
+/* ===== GRID PARA SÉRIES (NOVO) ===== */
+.grid-2 {
+    display: flex;
+    gap: 10px;
+}
+
+.grid-3 {
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== ELENCO (TAGS) ===== */
+#listaAtores span {
+    display: inline-flex;
+    align-items: center;
+    background: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+/* ===== POSTER ===== */
+#posterImg {
+    margin-top: 10px;
+    max-width: 150px;
+    border-radius: 8px;
+    display: none;
+}
+
+/* ===== TRAILER ===== */
+#previewTrailer iframe {
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* ===== CONTADOR ===== */
+#contador {
+    text-align: right;
+    font-size: 12px;
+    color: grey;
+}
+
+/* ===== SUCESSO ===== */
+#sucesso {
+    display: none;
+    margin-top: 15px;
+    color: #00ff88;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .grid-2,
+    .grid-3 {
+        flex-direction: column;
+    }
+}

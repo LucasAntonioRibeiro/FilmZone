@@ -43,6 +43,8 @@ const mobileNavbar = new MobileNavbar(
 );
 mobileNavbar.init();
 
+const series = JSON.parse(localStorage.getItem('series')) || [];
+
 const filmes = JSON.parse(localStorage.getItem('filmes')) || [];
 
 const container = document.querySelector('.carrossel');

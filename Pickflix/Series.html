@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/serie.css">
+    <title>Cadastro de serie</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="/">FILMZONE</a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li>Início</a></li>
+                <li><a href="Cadastro.html">Login</a></li>
+                <li><a href="Filmes.html">cadastrar filmes</a></li>
+                <li>Categorias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Cadastro de Série</h1>
+
+        <form id="serieForm">
+            <label>Nome da Série</label>
+            <input type="text" id="nome" required>
+
+            <label>Ano</label>
+            <input type="text" id="ano" required>
+
+            <label>Gênero</label>
+            <select id="genero" required>
+                <option value=""></option>
+                <option>Ação</option>
+                <option>Drama</option>
+                <option>Comédia</option>
+                <option>Ficção Cientifica</option>
+                <option>Fantasia</option>
+            </select>
+
+            <label>Classificação</label>
+            <select id="classificacao" required>
+                <option value=""></option>
+                <option>Livre</option>
+                <option>+12</option>
+                <option>+14</option>
+                <option>+16</option>
+                <option>+18</option>
+            </select>
+
+            <label>Temporadas</label>
+            <input type="number" id="temporadas" required>
+
+            <label>Episódios</label>
+            <input type="number" id="episodios" required>
+
+            <label>Duração média (minutos)</label>
+            <input type="number" id="temporadas" required>
+
+            <label>Criador</label>
+            <input type="text" id="criador" required>
+
+            <label>Elenco</label>
+            <input type="text" id="atorInput" placeholder="Digite e aperte Enter">
+            <div id="listaAtores"></div>
+
+            <label>Poster</label>
+            <input type="url" id="poster">
+            <img id="posterImg" style="display:none; width:150px; margin-top:10px;">
+
+            <label>Resumo</label>
+            <textarea id="resumo" maxlength="500"></textarea>
+            <div id="contador">0 / 500</div>
+
+            <label>Trailer</label>
+            <input type="url" id="trailerInput">
+            <div id="previewTrailer"></div>
+
+            <label>Top Séries</label>
+            <input type="checkbox" id="topSerie">
+
+            <button type="submit">Cadastrar Série</button>
+
+            <div id="sucesso" style="display:none;">Série cadastrada!</div>
+
+        </form>
+    </div>
+
+    <script src="js/series.js"></script>
+</body>
+
+</html>

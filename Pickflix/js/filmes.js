@@ -1,5 +1,6 @@
 const form = document.getElementById('filmeForm');
 const sucesso = document.getElementById('sucesso');
+const topHistorico = document.getElementById('topHistorico');
 
 const nome = document.getElementById('nome');
 const ano = document.getElementById('ano');
@@ -8,7 +9,6 @@ const classificacao = document.getElementById('classificacao');
 const horas = document.getElementById('horas');
 const minutos = document.getElementById('minutos');
 const diretor = document.getElementById('diretor');
-const elenco = document.getElementById('elenco');
 const poster = document.getElementById('poster');
 const posterImg = document.getElementById('posterImg');
 const resumo = document.getElementById('resumo');
@@ -21,16 +21,18 @@ const listaAtores = document.getElementById('listaAtores');
 let atores = [];
 
 
+// =============================
+// ADICIONAR ATORES COM "X"
+// =============================
 atorInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
 
-    const nome = atorInput.value.trim();
-    if (!nome) return;
+    const nomeAtor = atorInput.value.trim();
+    if (!nomeAtor) return;
 
-    atores.push(nome);
+    atores.push(nomeAtor);
 
-    // container da tag
     const tag = document.createElement('span');
     tag.style.display = 'inline-flex';
     tag.style.alignItems = 'center';
@@ -41,26 +43,20 @@ atorInput.addEventListener('keydown', (e) => {
     tag.style.borderRadius = '20px';
     tag.style.fontSize = '14px';
 
-    // nome do ator
     const texto = document.createElement('span');
-    texto.textContent = nome;
+    texto.textContent = nomeAtor;
 
-    // botão X
     const botaoRemover = document.createElement('span');
     botaoRemover.textContent = ' ✖';
     botaoRemover.style.cursor = 'pointer';
     botaoRemover.style.marginLeft = '8px';
     botaoRemover.style.fontWeight = 'bold';
 
-    // ação de remover
     botaoRemover.addEventListener('click', () => {
       listaAtores.removeChild(tag);
-
-      // remove do array
-      atores = atores.filter(a => a !== nome);
+      atores = atores.filter(a => a !== nomeAtor);
     });
 
-    // montar tag
     tag.appendChild(texto);
     tag.appendChild(botaoRemover);
     listaAtores.appendChild(tag);
@@ -69,13 +65,16 @@ atorInput.addEventListener('keydown', (e) => {
   }
 });
 
+
+// =============================
+// PREVIEW DO TRAILER (CORRIGIDO)
+// =============================
 if (trailerInput) {
   trailerInput.addEventListener('input', () => {
     const url = trailerInput.value;
 
     let videoId = '';
 
-    // 🔥 AQUI É A CORREÇÃO
     if (url.includes('youtube.com/watch?v=')) {
       videoId = url.split('v=')[1].split('&')[0];
     } else if (url.includes('youtu.be/')) {
@@ -94,7 +93,9 @@ if (trailerInput) {
 }
 
 
-// Preview do pôster
+// =============================
+// PREVIEW DO PÔSTER
+// =============================
 poster.addEventListener('input', () => {
   if (poster.value.includes('http')) {
     posterImg.src = poster.value;
@@ -104,12 +105,18 @@ poster.addEventListener('input', () => {
   }
 });
 
-// Contador de resumo
+
+// =============================
+// CONTADOR DE RESUMO
+// =============================
 resumo.addEventListener('input', () => {
   contador.textContent = `${resumo.value.length} / 500`;
 });
 
-// Envio do formulário
+
+// =============================
+// ENVIO DO FORMULÁRIO
+// =============================
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -134,33 +141,35 @@ form.addEventListener('submit', (e) => {
     poster: poster.value,
     resumo: resumo.value,
     trailer: trailerInput.value,
+
+    topHistorico: topHistorico.checked // 🔥 AGORA FUNCIONA
   };
 
   const filmes = JSON.parse(localStorage.getItem('filmes')) || [];
   filmes.push(filme);
   localStorage.setItem('filmes', JSON.stringify(filmes));
 
-  // Limpar formulário
+  // =============================
+  // LIMPEZA
+  // =============================
   form.reset();
-  // Limpar atores (array + tela)
-atores = [];
-listaAtores.innerHTML = '';
-
-// Limpar preview do trailer
-previewTrailer.innerHTML = '';
-
-// Limpar preview do pôster (já tinha, mas mantendo)
+  atores = [];
+  listaAtores.innerHTML = '';
+  previewTrailer.innerHTML = '';
   posterImg.style.display = 'none';
-  
-// Resetar contador
- contador.textContent = '0 / 500';
+  contador.textContent = '0 / 500';
 
-
-  // Mostrar sucesso
+  // =============================
+  // SUCESSO
+  // =============================
   sucesso.style.display = 'block';
   setTimeout(() => sucesso.style.display = 'none', 3000);
 });
 
+
+// =============================
+// MENU MOBILE
+// =============================
 class MobileNavbar {
   constructor(mobileMenu, navList, navLinks) {
     this.mobileMenu = document.querySelector(mobileMenu);
@@ -175,9 +184,7 @@ class MobileNavbar {
     this.navLinks.forEach((link, index) => {
       link.style.animation
         ? (link.style.animation = "")
-        : (link.style.animation = `navLinkFade 0.5s ease forwards ${
-            index / 7 + 0.3
-          }s`);
+        : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`);
     });
   }
 
