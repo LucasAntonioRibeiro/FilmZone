@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+
+    background:
+        radial-gradient(ellipse at top left, #073b85 0%, transparent 45%),
+        radial-gradient(ellipse at bottom right, #351078 0%, transparent 45%),
+        linear-gradient(135deg, #050b18, #101a35);
+
+    overflow-x: hidden;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+login-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+
+    background: rgba(9, 16, 31, 0.88);
+    border: 1px solid rgba(67, 142, 255, 0.45);
+    border-radius: 24px;
+
+    box-shadow:  0 20px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(29, 78, 216, 0.10);
+
+    backdrop-filter: blur(15px);
+
+    animation: aparecer 0.7s ease;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    background: linear-gradient(135deg, #008cff, #713bff);
+    box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #94a9c9;
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    height: 58px;
+    padding: 0 16px;
+    margin-bottom: 18px;
+
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid #354663;
+    border-radius: 12px;
+
+    transition: 0.3s;
+}
+
+.campo:focus-within {
+    border-color: #168cff;
+    box-shadow: 0 0 15px rgba(22, 140, 255, 0.15);
+    background: rgba(22, 140, 255, 0.04);
+}
+
+.icone {
+    font-size: 19px;
+}
+
+.campo input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: #ffffff;
+    font-size: 15px;
+}
