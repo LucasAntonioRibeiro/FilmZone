@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/Cadastro.css" />
+    <title>Cadastro | FilmZone</title>
+  </head>
+  <body>
+    <main class="cadastro-container">
+      <div class="cadastro-card">
+        <a href="Login.html" class="voltar">← Voltar ao login</a>
+
+        <div class="logo">
+          <svg
+            viewBox="0 0 24 24"
+            width="34"
+            height="34"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3 9 5-4 5 4 5-4 3 2" />
+            <path d="M10 12h4" />
+          </svg>
+        </div>
+
+        <h1>Crie sua conta</h1>
+
+        <form id="formCadastro">
+
+            <div class="campo">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
+            </div>
+
+            <div class="campo">
+                <label for="usuario">Nome de usuário</label>
+                <input type="text" id="usuario" placeholder="Escolha um nome de usuário" autocomplete="username" minlength="3" required>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="seuemail@gmail.com" autocomplete="email" required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+
+                <div class="campo-senha">
+                <input type="password" id="senha" placeholder="Crie uma senha" autocomplete="new-password" minlength="6" required>
+
+                <button type="button" class="mostrar-senha" data-alvo="senha" aria-label="Mostar senha">
+                    <svg viewBox="0 0 24 24" width="21" height="21"
+                                fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="confirmarSenha">Confirmar Senha</label>
+
+                <div class="campo-senha">
+                    <input type="password" id="confirmarSenha" placeholder="Digite a senha novamente" autocomplete="new-password" minlength="6" required>
+
+                   <button
+                            type="button"
+                            class="mostrar-senha"
+                            data-alvo="confirmarSenha"
+                            aria-label="Mostrar senha"
+                        >
+                            <svg viewBox="0 0 24 24" width="21" height="21"
+                                fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+        <label class="termos">
+                    <input type="checkbox" id="aceitarTermos" required>
+                    <span>Li e aceito os termos de uso e a política de privacidade.</span>
+                </label>
+
+                <button type="submit" class="btn-cadastro">
+                    Criar minha conta
+                </button>
+
+                <p id="mensagem" role="status" aria-live="polite"></p>
+
+            </form>
+
+            <p class="login-link">
+                Já tem uma conta?
+                <a href="Login.html">Faça login</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="JS/Cadastro.js"></script>
+
+</body>
+</html>
