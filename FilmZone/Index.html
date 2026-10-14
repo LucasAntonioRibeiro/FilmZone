@@ -28,10 +28,13 @@
     </header>
 
     
+
 <main class="catalogo">
     <section class="destaque">
         <p class="subtitulo">SEU UNIVERSO CINEMATOGRÁFICO</p>
+
         <h1>Descubra seu próximo filme favorito.</h1>
+
         <p>
             Explore histórias, conheça novos filmes e encontre
             algo incrível para assistir.
@@ -44,10 +47,50 @@
             <span>Explore nosso catálogo</span>
         </div>
 
+        <div class="controles-filmes">
+            <div class="campo-busca">
+                <input
+                    type="text"
+                    id="buscar-filme"
+                    placeholder="Buscar filme pelo título..."
+                    aria-label="Buscar filme pelo título"
+                >
+            </div>
+
+            <select id="filtrar-genero" aria-label="Filtrar por gênero">
+                <option value="">Todos os gêneros</option>
+                <option value="Ação">Ação</option>
+                <option value="Animação">Animação</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Ficção científica">Ficção científica</option>
+                <option value="Romance">Romance</option>
+                <option value="Suspense">Suspense</option>
+                <option value="Suspense">Terror</option>
+                <option value="Suspense">Comédia</option>
+            </select>
+
+            <select id="ordenar-filmes" aria-label="Ordenar filmes">
+                <option value="">Ordem padrão</option>
+                <option value="ano-desc">Mais recentes</option>
+                <option value="ano-asc">Mais antigos</option>
+                <option value="nota-desc">Melhor avaliados</option>
+                <option value="nota-asc">Menor avaliação</option>
+            </select>
+
+            <button type="button" id="limpar-filtros">
+                Limpar filtros
+            </button>
+
+        </div>
+
+        <p id="quantidade-filmes" class="quantidade-filmes"></p>
+
         <div id="lista-filmes" class="lista-filmes">
+            <!-- Os filmes serão adicionados pelo JavaScript -->
         </div>
     </section>
 </main>
+
 
 
     <div class="modal" id="modal-categorias">

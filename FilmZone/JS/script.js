@@ -161,14 +161,90 @@ const filmes = [
 const listaFilmes = document.getElementById("lista-filmes");
 
 
+
+const campoBusca = document.getElementById("buscar-filme");
+const filtroGenero = document.getElementById("filtrar-genero");
+const ordenacao = document.getElementById("ordenar-filmes");
+const quantidadeFilmes = document.getElementById("quantidade-filmes");
+
+const botaoLimparFiltros = document.getElementById("limpar-filtros");
+
+if (botaoLimparFiltros) {
+    botaoLimparFiltros.addEventListener("click", function () {
+        campoBusca.value = "";
+        filtroGenero.value = "";
+        ordenacao.value = "";
+
+        mostrarFilmes();
+    });
+}
+
 function mostrarFilmes() {
     if (!listaFilmes) {
         return;
     }
 
+    const textoBusca = campoBusca
+        ? campoBusca.value.trim().toLowerCase()
+        : "";
+
+    const generoSelecionado = filtroGenero
+        ? filtroGenero.value
+        : "";
+
+    const ordemSelecionada = ordenacao
+        ? ordenacao.value
+        : "";
+
+    let filmesFiltrados = filmes.filter(function (filme) {
+        const correspondeTitulo = filme.titulo
+            .toLowerCase()
+            .includes(textoBusca);
+
+        const correspondeGenero =
+            generoSelecionado === "" ||
+            filme.genero === generoSelecionado;
+
+        return correspondeTitulo && correspondeGenero;
+    });
+
+    if (ordemSelecionada === "ano-desc") {
+        filmesFiltrados.sort(function (a, b) {
+            return b.ano - a.ano;
+        });
+    } else if (ordemSelecionada === "ano-asc") {
+        filmesFiltrados.sort(function (a, b) {
+            return a.ano - b.ano;
+        });
+    } else if (ordemSelecionada === "nota-desc") {
+        filmesFiltrados.sort(function (a, b) {
+            return Number(b.nota) - Number(a.nota);
+        });
+    } else if (ordemSelecionada === "nota-asc") {
+        filmesFiltrados.sort(function (a, b) {
+            return Number(a.nota) - Number(b.nota);
+        });
+    }
+
     listaFilmes.innerHTML = "";
 
-    filmes.forEach(function (filme) {
+    if (quantidadeFilmes) {
+        quantidadeFilmes.textContent =
+            filmesFiltrados.length +
+            (filmesFiltrados.length === 1
+                ? " filme encontrado"
+                : " filmes encontrados");
+    }
+
+    if (filmesFiltrados.length === 0) {
+        const mensagem = document.createElement("p");
+        mensagem.className = "mensagem-sem-filmes";
+        mensagem.textContent = "Nenhum filme encontrado.";
+        listaFilmes.appendChild(mensagem);
+        return;
+    }
+
+    filmesFiltrados.forEach(function (filme) {
         const card = document.createElement("article");
         card.className = "card-filme";
 
@@ -180,13 +256,13 @@ function mostrarFilmes() {
         imagem.alt = "Pôster do filme " + filme.titulo;
         imagem.loading = "lazy";
 
-    imagem.onerror = function () {
-    imagem.style.display = "none";
-    poster.textContent = filme.titulo;
-    poster.style.color = "#ffffff";
-    poster.style.fontSize = "22px";
-    poster.style.fontWeight = "bold";
-};
+        imagem.onerror = function () {
+            imagem.style.display = "none";
+            poster.textContent = filme.titulo;
+            poster.style.color = "#ffffff";
+            poster.style.fontSize = "22px";
+            poster.style.fontWeight = "bold";
+        };
 
         poster.appendChild(imagem);
 
@@ -222,4 +298,18 @@ function mostrarFilmes() {
     });
 }
 
+if (campoBusca) {
+    campoBusca.addEventListener("input", mostrarFilmes);
+}
+
+if (filtroGenero) {
+    filtroGenero.addEventListener("change", mostrarFilmes);
+}
+
+if (ordenacao) {
+    ordenacao.addEventListener("change", mostrarFilmes);
+}
+
 mostrarFilmes();
+
+
