@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  background-color: black;
+}
+
 a {
   color: #fff;
   text-decoration: none;
@@ -295,14 +299,38 @@ main {
 
 .poster-filme {
     width: 100%;
-    height: 290px;
+    height: 320px;
     display: flex;
+    overflow: hidden;
     align-items: center;
+    background-color: #21151b;
     justify-content: center;
     padding: 20px;
     text-align: center;
     background: linear-gradient(145deg, #52202d, #171216 75%);
 }
+
+
+.poster-filme {
+    width: 100%;
+    height: 320px;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(145deg, #52202d, #171216);
+}
+
+.poster-filme img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-filme:hover .poster-filme img {
+    transform: scale(1.05);
+}
+
 
 .poster-filme h3 {
     font-size: 26px;
@@ -334,6 +362,7 @@ main {
     color: #f18a9c;
     font-size: 12px;
 }
+
 
 @media (max-width: 1000px) {
     .lista-filmes {

@@ -89,86 +89,108 @@ categorias.forEach(function (categoria) {
     });
 });
 
+
 const filmes = [
-  {
-    titulo: "Interestelar",
-    ano: 2014,
-    genero: "Ficção científica",
-    nota: "8.7",
-    descricao: "Uma jornada além das estrelas."
-  },
-  {
-    titulo: "Batman: O Cavaleiro das Trevas",
-    ano: 2008,
-    genero: "Ação",
-    nota: "9.0",
-    descricao: "Um herói diante do caos de Gotham."
-  },
-  {
-    titulo: "A Origem",
-    ano: 2010,
-    genero: "Suspense",
-    nota: "8.8",
-    descricao: "Uma missão dentro dos sonhos."
-  },
-  {
-    titulo: "Como Treinar o Seu Dragão",
-    ano: 2010,
-    genero: "Animação",
-    nota: "8.1",
-    descricao: "Uma amizade que muda tudo."
-  },
-  {
-    titulo: "Jurassic Park",
-    ano: 1993,
-    genero: "Aventura",
-    nota: "8.2",
-    descricao: "Uma descoberta extraordinária."
-  },
-  {
-    titulo: "Homem-Aranha",
-    ano: 2002,
-    genero: "Ação",
-    nota: "7.4",
-    descricao: "Um jovem aprende o peso de seus poderes."
-  },
-  {
-    titulo: "O Rei Leão",
-    ano: 1994,
-    genero: "Animação",
-    nota: "8.5",
-    descricao: "Uma história sobre família e coragem."
-  },
-  {
-    titulo: "Titanic",
-    ano: 1997,
-    genero: "Romance",
-    nota: "7.9",
-    descricao: "Uma história de amor em uma viagem inesquecível."
-  }
+    {
+        titulo: "Interestelar",
+        ano: 2014,
+        genero: "Ficção científica",
+        nota: "8.7",
+        descricao: "Uma jornada além das estrelas.",
+        poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+    },
+    {
+        titulo: "Batman: O Cavaleiro das Trevas",
+        ano: 2008,
+        genero: "Ação",
+        nota: "9.0",
+        descricao: "Um herói diante do caos de Gotham.",
+        poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+    },
+    {
+        titulo: "A Origem",
+        ano: 2010,
+        genero: "Suspense",
+        nota: "8.8",
+        descricao: "Uma missão dentro dos sonhos.",
+        poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+    },
+    {
+        titulo: "Como Treinar o Seu Dragão",
+        ano: 2010,
+        genero: "Animação",
+        nota: "8.1",
+        descricao: "Uma amizade que muda tudo.",
+        poster: "https://image.tmdb.org/t/p/w500/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg"
+    },
+    {
+        titulo: "Jurassic Park",
+        ano: 1993,
+        genero: "Aventura",
+        nota: "8.2",
+        descricao: "Uma descoberta extraordinária.",
+        poster: "https://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg"
+    },
+    {
+        titulo: "Homem-Aranha",
+        ano: 2002,
+        genero: "Ação",
+        nota: "7.4",
+        descricao: "Um jovem aprende o peso de seus poderes.",
+        poster: "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg"
+    },
+    {
+        titulo: "O Rei Leão",
+        ano: 1994,
+        genero: "Animação",
+        nota: "8.5",
+        descricao: "Uma história sobre família e coragem.",
+        poster: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg"
+    },
+    {
+        titulo: "Titanic",
+        ano: 1997,
+        genero: "Romance",
+        nota: "7.9",
+        descricao: "Uma história de amor inesquecível.",
+        poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
+    }
 ];
+
 
 const listaFilmes = document.getElementById("lista-filmes");
 
+
 function mostrarFilmes() {
-  if(!listaFilmes) {
-    return;
-  }
+    if (!listaFilmes) {
+        return;
+    }
 
-  listaFilmes.innerHTML = "";
+    listaFilmes.innerHTML = "";
 
-  filmes.forEach(function (filme) {
-    const card = document.createElement("article");
-    card.className = "card-filme";
+    filmes.forEach(function (filme) {
+        const card = document.createElement("article");
+        card.className = "card-filme";
 
-    const poster = document.createElement("div");
-    poster.className = "poster-filme";
+        const poster = document.createElement("div");
+        poster.className = "poster-filme";
 
-    const tituloPoster = document.createElement("h3");
-    tituloPoster.textContent = filme.titulo;
-    poster.appendChild(tituloPoster);
+        const imagem = document.createElement("img");
+        imagem.src = filme.poster;
+        imagem.alt = "Pôster do filme " + filme.titulo;
+        imagem.loading = "lazy";
 
-    const informacoes = document.createElement("div");
+    imagem.onerror = function () {
+    imagem.style.display = "none";
+    poster.textContent = filme.titulo;
+    poster.style.color = "#ffffff";
+    poster.style.fontSize = "22px";
+    poster.style.fontWeight = "bold";
+};
+
+        poster.appendChild(imagem);
+
+        const informacoes = document.createElement("div");
         informacoes.className = "info-filme";
 
         const titulo = document.createElement("h3");
