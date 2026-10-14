@@ -212,3 +212,165 @@ main {
 .lista-categorias button:hover {
     background-color: #e50914;
 }
+
+.catalogo {
+    min-height: 100vh;
+    padding: 40px 6%;
+    color: #f5f5f5;
+    background: linear-gradient(
+        180deg,
+        #171417 0%,
+        #0b0b0d 45%,
+        #080809 100%
+    );
+}
+
+.destaque {
+    padding: 55px 35px;
+    margin-bottom: 45px;
+    border-radius: 12px;
+    background: linear-gradient(
+        100deg,
+        #39151f,
+        #1b1118 60%,
+        #101013
+    );
+    border: 1px solid #45232e;
+}
+
+.subtitulo {
+    color: #e35a70;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.destaque h1 {
+    max-width: 650px;
+    margin: 15px 0;
+    font-size: clamp(30px, 4vw, 48px);
+}
+
+.destaque p:last-child {
+    max-width: 550px;
+    color: #c5bec2;
+    line-height: 1.7;
+}
+
+.titulo-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.titulo-secao h2 {
+    font-size: 25px;
+}
+
+.titulo-secao span {
+    color: #aaa2a7;
+    font-size: 14px;
+}
+
+.lista-filmes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.card-filme {
+    overflow: hidden;
+    background-color: #171619;
+    border: 1px solid #29262a;
+    border-radius: 10px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card-filme:hover {
+    transform: translateY(-7px);
+    border-color: #a92e46;
+}
+
+.poster-filme {
+    width: 100%;
+    height: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(145deg, #52202d, #171216 75%);
+}
+
+.poster-filme h3 {
+    font-size: 26px;
+    color: #fff;
+    text-shadow: 0 3px 12px #000;
+}
+
+.info-filme {
+    padding: 18px;
+}
+
+.info-filme h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.info-filme p {
+    margin: 7px 0;
+    color: #b8b2b7;
+    font-size: 14px;
+}
+
+.genero-filme {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #35202a;
+    color: #f18a9c;
+    font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+    .lista-filmes {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .lista-filmes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .catalogo {
+        padding: 25px 4%;
+    }
+
+    .destaque {
+        padding: 30px 22px;
+    }
+
+    .poster-filme {
+        height: 220px;
+    }
+
+    .titulo-secao {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 420px) {
+    .lista-filmes {
+        grid-template-columns: 1fr;
+    }
+
+    .poster-filme {
+        height: 280px;
+    }
+}
