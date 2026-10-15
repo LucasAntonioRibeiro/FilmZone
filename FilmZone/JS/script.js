@@ -92,12 +92,17 @@ categorias.forEach(function (categoria) {
 
 const filmes = [
     {
-        titulo: "Interestelar",
-        ano: 2014,
-        genero: "Ficção científica",
-        nota: "8.7",
-        descricao: "Uma jornada além das estrelas.",
-        poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+    titulo: "Interestelar",
+    ano: 2014,
+    genero: "Ficção científica",
+    nota: "8.7",
+    descricao: "Uma jornada além das estrelas.",
+    poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+
+    sinopse: "Em um futuro em que a Terra enfrenta uma crise ambiental, um grupo de exploradores parte em uma missão espacial em busca de um novo lar para a humanidade.",
+    diretor: "Christopher Nolan",
+    elenco: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+    duracao: "2h 49min"
     },
     {
         titulo: "Batman: O Cavaleiro das Trevas",
@@ -105,7 +110,13 @@ const filmes = [
         genero: "Ação",
         nota: "9.0",
         descricao: "Um herói diante do caos de Gotham.",
-        poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+
+        sinopse: "Batman: O Cavaleiro das Trevas (2008) acompanha Batman (Christian Bale) e o promotor Harvey Dent (Aaron Eckhart), aliados ao tenente James Gordon (Gary Oldman), na luta contra o crime organizado em Gotham.  Essa aliança é ameaçada pelo surgimento do Coringa (Heath Ledger), um agente do caos que busca lançar a cidade na anarquia e provar que qualquer um pode se corromper. ",
+        diretor: "Christopher Nolan",
+        elenco: "Christian Bale, Heath Ledger, Aaron Eckhart",
+        duracao: "2h 32min"
+        
     },
     {
         titulo: "A Origem",
@@ -113,7 +124,12 @@ const filmes = [
         genero: "Suspense",
         nota: "8.8",
         descricao: "Uma missão dentro dos sonhos.",
-        poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+
+        sinopse: "A Origem (Inception, 2010), dirigido por Christopher Nolan, acompanha Dom Cobb (Leonardo DiCaprio), um ladrão especializado em extrair segredos do subconsciente durante os sonhos.  Para ser absolvido de acusações e reencontrar seus filhos nos EUA, Cobb aceita uma última missão impossível: a inserção, que consiste em plantar uma ideia na mente do herdeiro de um império energético, Robert Fischer ",
+        diretor: "Christopher Nolan",
+        elenco: "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
+        duracao: "2h 28min"
     },
     {
         titulo: "Como Treinar o Seu Dragão",
@@ -121,7 +137,12 @@ const filmes = [
         genero: "Animação",
         nota: "8.1",
         descricao: "Uma amizade que muda tudo.",
-        poster: "https://image.tmdb.org/t/p/w500/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
+
+        sinopse: "Como Treinar o Seu Dragão é uma franquia de animação da DreamWorks (e um recente filme live-action de 2025) que narra a história de Soluço (Hiccup), um jovem viking franzino e desajeitado da ilha de Berk, filho do chefe Stoico.  Em um mundo onde vikings e dragões estão em guerra, Soluço derruba um raro e temido Fúria da Noite, mas, em vez de matá-lo, forma uma amizade improvável com o dragão, a quem chama de Banguela. ",
+        diretor: "Chris Sanders e Dean DeBlois",
+        elenco: "Jay Baruchel, America Ferrera, Gerard Butler",
+        duracao: "1h 38min"
     },
     {
         titulo: "Jurassic Park",
@@ -129,7 +150,12 @@ const filmes = [
         genero: "Aventura",
         nota: "8.2",
         descricao: "Uma descoberta extraordinária.",
-        poster: "https://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg",
+
+        sinopse: "Jurassic Park conta a história do bilionário John Hammond, que cria um parque temático na Isla Nublar com dinossauros clonados a partir de DNA preservado em âmbar.  Para validar a segurança do empreendimento antes da abertura ao público, Hammond convida o paleontólogo Alan Grant, a paleobotânica Ellie Sattler, o matemático Ian Malcolm e os netos de Hammond, Tim e Lex, para uma visita guiada. ",
+        diretor: "Steven Spielberg",
+        elenco: "Sam Neill, Laura Dern, Jeff Goldblum",
+        duracao: "2h 7min"
     },
     {
         titulo: "Homem-Aranha",
@@ -137,7 +163,12 @@ const filmes = [
         genero: "Ação",
         nota: "7.4",
         descricao: "Um jovem aprende o peso de seus poderes.",
-        poster: "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg",
+
+        sinopse: "Dirigido por Sam Raimi e estrelado por Tobey Maguire, o filme narra a história de origem de Peter Parker, um jovem tímido picado por uma aranha geneticamente modificada que adquire superpoderes.  Após o assassinato de seu tio Ben, Peter decide usar suas habilidades para combater o crime, enfrentando o Duende Verde (Norman Osborn). ",
+        diretor: "Sam Raimi",
+        elenco: "Tobey Maguire, Kirsten Dunst, Willem Dafoe",
+        duracao: "2h 1min"
     },
     {
         titulo: "O Rei Leão",
@@ -145,7 +176,12 @@ const filmes = [
         genero: "Animação",
         nota: "8.5",
         descricao: "Uma história sobre família e coragem.",
-        poster: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+
+        sinopse: "O Rei Leão narra a jornada de Simba, um jovem leão destinado a governar as Terras do Reino, cujo destino é alterado pela traição de seu tio Scar.  Após ser manipulado a acreditar que é responsável pela morte acidental de seu pai, o rei Mufasa, Simba foge do reino e vive uma vida despreocupada com seus novos amigos, o suricato Timão e o javali Pumba. ",
+        diretor: "Roger Allers e Rob Minkoff",
+        elenco: "Matthew Broderick, James Earl Jones, Jeremy Irons",
+        duracao: "1h 28min"
     },
     {
         titulo: "Titanic",
@@ -153,7 +189,12 @@ const filmes = [
         genero: "Romance",
         nota: "7.9",
         descricao: "Uma história de amor inesquecível.",
-        poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
+        poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+
+        sinopse: "Jack Dawson (Leonardo DiCaprio) é um jovem aventureiro que, na mesa de jogo, ganha uma passagem para a primeira viagem do transatlântico Titanic. Trata-se de um luxuoso e imponente navio, anunciado na época como inafundável, que parte para os Estados Unidos. Nele está também Rose DeWitt Bukater (Kate Winslet), a jovem noiva de Caledon Hockley (Billy Zane). Rose está descontente com sua vida, já que sente-se sufocada pelos costumes da elite e não ama Caledon. Entretanto, ela precisa se casar com ele para manter o bom nome da família, que está falida. Um dia, desesperada, Rose ameaça se atirar do Titanic, mas Jack consegue demovê-la da ideia. Pelo ato ele é convidado a jantar na primeira classe, onde começa a se tornar mais próximo de Rose. Logo eles se apaixonam, despertando a fúria de Caledon. A situação fica ainda mais complicada quando o Titanic se choca com um iceberg, provocando algo que ninguém imaginava ser possível: o naufrágio do navio. ",
+        diretor: "James Cameron",
+        elenco: "Leonardo DiCaprio, Kate Winslet, Billy Zane",
+        duracao: "3h 14min"
     }
 ];
 
@@ -247,6 +288,20 @@ function mostrarFilmes() {
     filmesFiltrados.forEach(function (filme) {
         const card = document.createElement("article");
         card.className = "card-filme";
+        card.tabIndex = 0;
+card.setAttribute("role", "button");
+card.setAttribute("aria-label", "Ver detalhes de " + filme.titulo);
+
+card.addEventListener("click", function () {
+    abrirDetalhes(filme);
+});
+
+card.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        abrirDetalhes(filme);
+    }
+});
 
         const poster = document.createElement("div");
         poster.className = "poster-filme";
@@ -309,6 +364,50 @@ if (filtroGenero) {
 if (ordenacao) {
     ordenacao.addEventListener("change", mostrarFilmes);
 }
+
+const modalDetalhes = document.getElementById("modal-detalhes");
+const fecharDetalhes = document.getElementById("fechar-detalhes");
+
+function abrirDetalhes(filme) {
+    document.getElementById("detalhe-poster").src = filme.poster || "";
+    document.getElementById("detalhe-poster").alt = "Pôster de " + filme.titulo;
+
+    document.getElementById("detalhe-genero").textContent = filme.genero;
+    document.getElementById("detalhe-titulo").textContent = "Ano: " + filme.titulo;
+    document.getElementById("detalhe-ano").textContent = "★ " + filme.nota + " / 10";
+    document.getElementById("detalhe-duracao").textContent =
+        "Duração: " + (filme.duracao || "Não informada");
+
+    document.getElementById("detalhe-sinopse").textContent =
+        filme.sinopse || filme.descricao;
+
+    document.getElementById("detalhe-diretor").textContent =
+        filme.diretor || "Não informado";
+
+    document.getElementById("detalhe-elenco").textContent =
+        filme.elenco || "Não informado";
+
+    modalDetalhes.classList.add("ativo");
+}
+
+function fecharJanelaDetalhes() {
+    modalDetalhes.classList.remove("ativo");
+}
+
+fecharDetalhes.addEventListener("click", fecharJanelaDetalhes);
+
+modalDetalhes.addEventListener("click", function (event) {
+    if (event.target === modalDetalhes) {
+        fecharJanelaDetalhes();
+    }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        fecharJanelaDetalhes();
+    }
+});
+
 
 mostrarFilmes();
 
