@@ -198,6 +198,14 @@ const filmes = [
     }
 ];
 
+// Carregar os filmes cadastrados pelo formulário
+const filmesCadastrados = JSON.parse(
+    localStorage.getItem("filmesCadastrados") || "[]"
+);
+
+// Adicionar os filmes cadastrados ao catálogo
+filmes.push(...filmesCadastrados);
+
 
 const listaFilmes = document.getElementById("lista-filmes");
 
