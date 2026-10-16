@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/CadastrarFilme.css">
+    <title>Cadastrar filme | FilmZone</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="Logo" href="/">Filme zone</a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+            <ul class="nav-list">
+                <li><a href="#">Início</a></li>
+                <li><a href="#" id="abrir-categorias">Categorias</a></li>
+                <li><a href="CadastrarFilme.html">Cadastrar</a></li>
+                <li><a href="Login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pagina-cadastro-filme">
+
+        <section class="formulario-filme">
+            <p class="subtitulo">EXPANDA SEU UNIVERSO CINEMATROGRÁFICO</p>
+
+            <h1>Cadastrar novo filme</h1>
+            <p>Preencha as informações para adicionar um filme ao catálogo.</p>
+
+            <form id="form-cadastro-filme">
+
+                <label for="titulo-filme">Título do filme</label>
+                <input type="text" id="titulo-filme" required>
+
+                <label for="ano-filme">Ano de lançamento</label>
+                <input type="number" id="ano-filme" min="1888" max="2100" required>
+
+                <label for="genero-filme">Gênero</label>
+                <select id="genero-filme" required>
+                    <option value="">Selecione um gênero</option>
+                    <option value="Ação">Ação</option>
+                    <option value="Animação">Animação</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Ficção científica">Ficção científica</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Terror">Terror</option>
+                </select>
+
+                <label for="nota-filme">Nota (0 a 10)</label>
+                <input type="number" id="nota-filme" min="0" max="10" step="0.1" required>
+
+                <label for="duracao-filme">Duração</label>
+                <input type="text" id="duracao-filme" placeholder="Ex.: 2h 15min" required>
+
+                <label for="diretor-filme">Diretor</label>
+                <input type="text" id="diretor-filme"required>
+
+                <label for="eleco-filme">Elenco do filme</label>
+                <input type="text" id="eleco-filme" placeholder="Separe os nomes por vírgula" required>
+
+                <label for="poster-filme">URL do pôster</label>
+                <input type="url" id="poster-filme" placeholder="https://..." required>
+
+                <label for="sinopse-filme">Sinopse completa</label>
+                <textarea id="sinopse-filme" rows="5" required></textarea>
+
+                <button type="submit">Cadastrar filme</button>
+
+                <p id="mensagem-filme" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="JS/CadasrarFilme.js"></script>
+</body>
+</html>
