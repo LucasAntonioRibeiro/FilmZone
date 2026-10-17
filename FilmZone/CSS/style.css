@@ -606,3 +606,40 @@ main {
         font-size: 24px;
     }
 }
+
+/* Botões de edição e exclusão dos filmes */
+
+.acoes-filme {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px 15px;
+}
+
+.acoes-filme button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.botao-editar {
+    background-color: #45404a;
+}
+
+.botao-editar:hover {
+    background-color: #655967;
+    transform: translateY(-2px);
+}
+
+.botao-excluir {
+    background-color: #a92543;
+}
+
+.botao-excluir:hover {
+    background-color: #d43c5b;
+    transform: translateY(-2px);
+}

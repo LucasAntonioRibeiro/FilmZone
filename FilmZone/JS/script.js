@@ -356,6 +356,35 @@ card.addEventListener("keydown", function (event) {
             genero
         );
 
+        if (filme.id) {
+            const acoesFilme = document.createElement("div");
+            acoesFilme.className = "acoes-filme";
+
+            const botaoEditar = document.createElement("button");
+            botaoEditar.type = "button";
+            botaoEditar.textContent = "Editar";
+            botaoEditar.className = "botao-editar";
+
+            const botaoExcluir = document.createElement("button");
+            botaoExcluir.type = "button";
+            botaoExcluir.textContent = "Excluir";
+            botaoExcluir.className = "botao-excluir";
+
+            botaoEditar.addEventListener("click", function (event) {
+              event.stopPropagation();
+              editarFilme(filme);  
+            });
+
+            botaoExcluir.addEventListener("click", function (event) {
+                event.stopPropagation();
+                excluirFilme(filme);
+            });
+
+            acoesFilme.appendChild(botaoEditar);
+            acoesFilme.appendChild(botaoExcluir);
+
+            card.appendChild(acoesFilme);        }
+
         card.append(poster, informacoes);
         listaFilmes.appendChild(card);
     });
@@ -376,27 +405,42 @@ if (ordenacao) {
 const modalDetalhes = document.getElementById("modal-detalhes");
 const fecharDetalhes = document.getElementById("fechar-detalhes");
 
+
 function abrirDetalhes(filme) {
     document.getElementById("detalhe-poster").src = filme.poster || "";
     document.getElementById("detalhe-poster").alt = "Pôster de " + filme.titulo;
 
     document.getElementById("detalhe-genero").textContent = filme.genero;
-    document.getElementById("detalhe-titulo").textContent = "Ano: " + filme.titulo;
-    document.getElementById("detalhe-ano").textContent = "★ " + filme.nota + " / 10";
+
+    // Título correto do filme
+    document.getElementById("detalhe-titulo").textContent = filme.titulo;
+
+    // Ano de lançamento
+    document.getElementById("detalhe-ano").textContent = "Ano: " + filme.ano;
+
+    // Nota do filme
+    document.getElementById("detalhe-nota").textContent = "★ " + filme.nota + " / 10";
+
+    // Duração
     document.getElementById("detalhe-duracao").textContent =
         "Duração: " + (filme.duracao || "Não informada");
 
+    // Sinopse
     document.getElementById("detalhe-sinopse").textContent =
         filme.sinopse || filme.descricao;
 
+    // Direção
     document.getElementById("detalhe-diretor").textContent =
         filme.diretor || "Não informado";
 
+    // Elenco principal
     document.getElementById("detalhe-elenco").textContent =
         filme.elenco || "Não informado";
 
+    // Abrir o modal
     modalDetalhes.classList.add("ativo");
 }
+
 
 function fecharJanelaDetalhes() {
     modalDetalhes.classList.remove("ativo");
@@ -415,6 +459,153 @@ document.addEventListener("keydown", function (event) {
         fecharJanelaDetalhes();
     }
 });
+
+function editarFilme(filme) {
+    const titulo = prompt("Título do filme:", filme.titulo);
+    if (titulo === null) return;
+
+    const ano = prompt("Ano de lançamento:", filme.ano);
+    if (ano === null) return;
+
+    const genero = prompt("Gênero:", filme.genero);
+    if (genero === null) return;
+
+    const nota = prompt("Nota de 0 a 10:", filme.nota);
+    if (nota === null) return;
+
+    const duracao = prompt("Duração:", filme.duracao || "");
+    if (duracao === null) return;
+
+    const diretor = prompt("Diretor:", filme.diretor || "");
+    if (diretor === null) return;
+
+    const elenco = prompt("Elenco:", filme.elenco || "");
+    if (elenco === null) return;
+
+    const poster = prompt("URL do pôster:", filme.poster || "");
+    if (poster === null) return;
+
+    const sinopse = prompt(
+        "Sinopse:",
+        filme.sinopse || filme.descricao || ""
+    );
+    if (sinopse === null) return;
+
+    if (
+        !titulo.trim() ||
+        !genero.trim() ||
+        !duracao.trim() ||
+        !diretor.trim() ||
+        !elenco.trim() ||
+        !poster.trim() ||
+        !sinopse.trim()
+    ) {
+        alert("Preencha todas as informações.");
+        return;
+    }
+
+    const anoNumero = Number(ano);
+    const notaNumero = Number(nota);
+
+    if (
+        !Number.isInteger(anoNumero) ||
+        anoNumero < 1888 ||
+        anoNumero > 2100
+    ) {
+        alert("Informe um ano válido.");
+        return;
+    }
+
+    if (
+        nota.trim() === "" ||
+        !Number.isFinite(notaNumero) ||
+        notaNumero < 0 ||
+        notaNumero > 10
+    ) {
+        alert("A nota deve estar entre 0 e 10.");
+        return;
+    }
+
+    // Atualizar os dados do filme
+    filme.titulo = titulo.trim();
+    filme.ano = anoNumero;
+    filme.genero = genero.trim();
+    filme.nota = notaNumero.toFixed(1);
+    filme.duracao = duracao.trim();
+    filme.diretor = diretor.trim();
+    filme.elenco = elenco.trim();
+    filme.poster = poster.trim();
+    filme.sinopse = sinopse.trim();
+    filme.descricao = sinopse.trim();
+
+    // Atualizar os filmes salvos no navegador
+    const filmesSalvos = JSON.parse(
+        localStorage.getItem("filmesCadastrados") || "[]"
+    );
+
+    const indice = filmesSalvos.findIndex(
+        function (item) {
+            return item.id === filme.id;
+        }
+    );
+
+    if (indice === -1) {
+        alert("Não foi possível encontrar o filme salvo.");
+        return;
+    }
+
+    filmesSalvos[indice] = filme;
+
+    localStorage.setItem(
+        "filmesCadastrados",
+        JSON.stringify(filmesSalvos)
+    );
+
+    alert("Filme atualizado com sucesso!");
+
+    mostrarFilmes();
+}
+
+function excluirFilme(filme) {
+    const confirmar = confirm(
+        'Tem certeza que deseja excluir "' + filme.titulo + '"?'
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    const filmesSalvos = JSON.parse(
+        localStorage.getItem("filmesCadastrados") || "[]"
+    );
+
+    const filmesAtualizados = filmesSalvos.filter(
+        function (item) {
+            return item.id !== filme.id;
+        }
+    );
+
+    localStorage.setItem(
+        "filmesCadastrados",
+        JSON.stringify(filmesAtualizados)
+    );
+
+    // Remover o filme também da lista que está na memória
+    const indice = filmes.findIndex(
+        function (item) {
+            return item.id === filme.id;
+        }
+    );
+
+    if (indice !== -1) {
+        filmes.splice(indice, 1);
+    }
+
+    alert("Filme excluído com sucesso!");
+
+    mostrarFilmes();
+}
+
 
 
 mostrarFilmes();
