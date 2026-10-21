@@ -1,108 +1,118 @@
+
+/* =========================================
+   1. MENU RESPONSIVO
+========================================= */
+
 class MobileNavbar {
-  constructor(mobileMenu, navList, navLinks) {
-    this.mobileMenu = document.querySelector(mobileMenu);
-    this.navList = document.querySelector(navList);
-    this.navLinks = document.querySelectorAll(navLinks);
-    this.activeClass = "active";
+    constructor(mobileMenu, navList, navLinks) {
+        this.mobileMenu = document.querySelector(mobileMenu);
+        this.navList = document.querySelector(navList);
+        this.navLinks = document.querySelectorAll(navLinks);
+        this.activeClass = "active";
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  animateLinks() {
-    this.navLinks.forEach((link, index) => {
-      link.style.animation
-        ? (link.style.animation = "")
-        : (link.style.animation = `navLinkFade 0.5s ease forwards ${
-            index / 7 + 0.3
-          }s`);
-    });
-  }
-
-  handleClick() {
-    this.navList.classList.toggle(this.activeClass);
-    this.mobileMenu.classList.toggle(this.activeClass);
-    this.animateLinks();
-  }
-
-  addClickEvent() {
-    this.mobileMenu.addEventListener("click", this.handleClick);
-  }
-
-  init() {
-    if (this.mobileMenu) {
-      this.addClickEvent();
+        this.handleClick = this.handleClick.bind(this);
     }
-    return this;
-  }
+
+    animateLinks() {
+        this.navLinks.forEach((link, index) => {
+            link.style.animation
+                ? (link.style.animation = "")
+                : (link.style.animation =
+                    `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`);
+        });
+    }
+
+    handleClick() {
+        this.navList.classList.toggle(this.activeClass);
+        this.mobileMenu.classList.toggle(this.activeClass);
+        this.animateLinks();
+    }
+
+    addClickEvent() {
+        this.mobileMenu.addEventListener("click", this.handleClick);
+    }
+
+    init() {
+        if (this.mobileMenu && this.navList) {
+            this.addClickEvent();
+        }
+        return this;
+    }
 }
 
 const mobileNavbar = new MobileNavbar(
-  ".mobile-menu",
-  ".nav-list",
-  ".nav-list li",
+    ".mobile-menu",
+    ".nav-list",
+    ".nav-list li"
 );
+
 mobileNavbar.init();
 
 
-// Elementos do modal
+/* =========================================
+   2. MODAL DE CATEGORIAS
+========================================= */
+
 const abrirCategorias = document.getElementById("abrir-categorias");
 const modalCategorias = document.getElementById("modal-categorias");
 const fecharModal = document.getElementById("fechar-modal");
 
-// Abrir o modal ao clicar em Categorias
-abrirCategorias.addEventListener("click", function (event) {
-    event.preventDefault();
-    modalCategorias.classList.add("ativo");
-});
+if (abrirCategorias && modalCategorias) {
+    abrirCategorias.addEventListener("click", function (event) {
+        event.preventDefault();
+        modalCategorias.classList.add("ativo");
+    });
+}
 
-// Fechar ao clicar no X
-fecharModal.addEventListener("click", function () {
-    modalCategorias.classList.remove("ativo");
-});
-
-// Fechar ao clicar fora do conteúdo
-modalCategorias.addEventListener("click", function (event) {
-    if (event.target === modalCategorias) {
+if (fecharModal && modalCategorias) {
+    fecharModal.addEventListener("click", function () {
         modalCategorias.classList.remove("ativo");
-    }
-});
+    });
+}
 
-// Fechar ao pressionar ESC
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        modalCategorias.classList.remove("ativo");
-    }
-});
+if (modalCategorias) {
+    modalCategorias.addEventListener("click", function (event) {
+        if (event.target === modalCategorias) {
+            modalCategorias.classList.remove("ativo");
+        }
+    });
+}
 
 const categorias = document.querySelectorAll(".categoria");
-
 const categoriaSelecionada = document.getElementById("categoria-selecionada");
 
 categorias.forEach(function (categoria) {
     categoria.addEventListener("click", function () {
         const nomeCategoria = this.dataset.categoria;
 
-        categoriaSelecionada.textContent =
-            "Categoria selecionada: " + nomeCategoria;
+        if (categoriaSelecionada) {
+            categoriaSelecionada.textContent =
+                "Categoria selecionada: " + nomeCategoria;
+        }
 
-        modalCategorias.classList.remove("ativo");
+        if (modalCategorias) {
+            modalCategorias.classList.remove("ativo");
+        }
     });
 });
 
 
+/* =========================================
+   3. FILMES ORIGINAIS DO CATÁLOGO
+========================================= */
+
 const filmes = [
     {
-    titulo: "Interestelar",
-    ano: 2014,
-    genero: "Ficção científica",
-    nota: "8.7",
-    descricao: "Uma jornada além das estrelas.",
-    poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
-
-    sinopse: "Em um futuro em que a Terra enfrenta uma crise ambiental, um grupo de exploradores parte em uma missão espacial em busca de um novo lar para a humanidade.",
-    diretor: "Christopher Nolan",
-    elenco: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
-    duracao: "2h 49min"
+        titulo: "Interestelar",
+        ano: 2014,
+        genero: "Ficção científica",
+        nota: "8.7",
+        descricao: "Uma jornada além das estrelas.",
+        poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+        sinopse: "Em um futuro em que a Terra enfrenta uma crise ambiental, um grupo de exploradores parte em uma missão espacial em busca de um novo lar para a humanidade.",
+        diretor: "Christopher Nolan",
+        elenco: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+        duracao: "2h 49min"
     },
     {
         titulo: "Batman: O Cavaleiro das Trevas",
@@ -111,12 +121,10 @@ const filmes = [
         nota: "9.0",
         descricao: "Um herói diante do caos de Gotham.",
         poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-
-        sinopse: "Batman: O Cavaleiro das Trevas (2008) acompanha Batman (Christian Bale) e o promotor Harvey Dent (Aaron Eckhart), aliados ao tenente James Gordon (Gary Oldman), na luta contra o crime organizado em Gotham.  Essa aliança é ameaçada pelo surgimento do Coringa (Heath Ledger), um agente do caos que busca lançar a cidade na anarquia e provar que qualquer um pode se corromper. ",
+        sinopse: "Batman e o promotor Harvey Dent, aliados ao tenente James Gordon, lutam contra o crime organizado em Gotham. A aliança é ameaçada pelo Coringa, que pretende mergulhar a cidade no caos.",
         diretor: "Christopher Nolan",
         elenco: "Christian Bale, Heath Ledger, Aaron Eckhart",
         duracao: "2h 32min"
-        
     },
     {
         titulo: "A Origem",
@@ -125,8 +133,7 @@ const filmes = [
         nota: "8.8",
         descricao: "Uma missão dentro dos sonhos.",
         poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-
-        sinopse: "A Origem (Inception, 2010), dirigido por Christopher Nolan, acompanha Dom Cobb (Leonardo DiCaprio), um ladrão especializado em extrair segredos do subconsciente durante os sonhos.  Para ser absolvido de acusações e reencontrar seus filhos nos EUA, Cobb aceita uma última missão impossível: a inserção, que consiste em plantar uma ideia na mente do herdeiro de um império energético, Robert Fischer ",
+        sinopse: "Dom Cobb é um especialista em entrar nos sonhos das pessoas para roubar segredos. Ele recebe uma missão extraordinária: plantar uma ideia na mente de alguém.",
         diretor: "Christopher Nolan",
         elenco: "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
         duracao: "2h 28min"
@@ -138,8 +145,7 @@ const filmes = [
         nota: "8.1",
         descricao: "Uma amizade que muda tudo.",
         poster: "https://image.tmdb.org/t/p/w500/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
-
-        sinopse: "Como Treinar o Seu Dragão é uma franquia de animação da DreamWorks (e um recente filme live-action de 2025) que narra a história de Soluço (Hiccup), um jovem viking franzino e desajeitado da ilha de Berk, filho do chefe Stoico.  Em um mundo onde vikings e dragões estão em guerra, Soluço derruba um raro e temido Fúria da Noite, mas, em vez de matá-lo, forma uma amizade improvável com o dragão, a quem chama de Banguela. ",
+        sinopse: "Soluço é um jovem viking que vive em um mundo onde vikings e dragões são inimigos. Ao encontrar um dragão chamado Banguela, ele desenvolve uma amizade capaz de mudar seu povo.",
         diretor: "Chris Sanders e Dean DeBlois",
         elenco: "Jay Baruchel, America Ferrera, Gerard Butler",
         duracao: "1h 38min"
@@ -151,8 +157,7 @@ const filmes = [
         nota: "8.2",
         descricao: "Uma descoberta extraordinária.",
         poster: "https://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg",
-
-        sinopse: "Jurassic Park conta a história do bilionário John Hammond, que cria um parque temático na Isla Nublar com dinossauros clonados a partir de DNA preservado em âmbar.  Para validar a segurança do empreendimento antes da abertura ao público, Hammond convida o paleontólogo Alan Grant, a paleobotânica Ellie Sattler, o matemático Ian Malcolm e os netos de Hammond, Tim e Lex, para uma visita guiada. ",
+        sinopse: "Um bilionário cria um parque temático com dinossauros recriados geneticamente. Durante uma visita de especialistas, falhas de segurança transformam o passeio em uma luta pela sobrevivência.",
         diretor: "Steven Spielberg",
         elenco: "Sam Neill, Laura Dern, Jeff Goldblum",
         duracao: "2h 7min"
@@ -164,8 +169,7 @@ const filmes = [
         nota: "7.4",
         descricao: "Um jovem aprende o peso de seus poderes.",
         poster: "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg",
-
-        sinopse: "Dirigido por Sam Raimi e estrelado por Tobey Maguire, o filme narra a história de origem de Peter Parker, um jovem tímido picado por uma aranha geneticamente modificada que adquire superpoderes.  Após o assassinato de seu tio Ben, Peter decide usar suas habilidades para combater o crime, enfrentando o Duende Verde (Norman Osborn). ",
+        sinopse: "Peter Parker adquire superpoderes após ser picado por uma aranha geneticamente modificada. Depois de uma tragédia pessoal, ele decide usar suas habilidades para combater o crime.",
         diretor: "Sam Raimi",
         elenco: "Tobey Maguire, Kirsten Dunst, Willem Dafoe",
         duracao: "2h 1min"
@@ -177,8 +181,7 @@ const filmes = [
         nota: "8.5",
         descricao: "Uma história sobre família e coragem.",
         poster: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
-
-        sinopse: "O Rei Leão narra a jornada de Simba, um jovem leão destinado a governar as Terras do Reino, cujo destino é alterado pela traição de seu tio Scar.  Após ser manipulado a acreditar que é responsável pela morte acidental de seu pai, o rei Mufasa, Simba foge do reino e vive uma vida despreocupada com seus novos amigos, o suricato Timão e o javali Pumba. ",
+        sinopse: "Simba é um jovem leão destinado a governar as Terras do Reino. Após uma traição, ele deixa sua casa e precisa enfrentar o passado para descobrir seu verdadeiro lugar.",
         diretor: "Roger Allers e Rob Minkoff",
         elenco: "Matthew Broderick, James Earl Jones, Jeremy Irons",
         duracao: "1h 28min"
@@ -190,48 +193,65 @@ const filmes = [
         nota: "7.9",
         descricao: "Uma história de amor inesquecível.",
         poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
-
-        sinopse: "Jack Dawson (Leonardo DiCaprio) é um jovem aventureiro que, na mesa de jogo, ganha uma passagem para a primeira viagem do transatlântico Titanic. Trata-se de um luxuoso e imponente navio, anunciado na época como inafundável, que parte para os Estados Unidos. Nele está também Rose DeWitt Bukater (Kate Winslet), a jovem noiva de Caledon Hockley (Billy Zane). Rose está descontente com sua vida, já que sente-se sufocada pelos costumes da elite e não ama Caledon. Entretanto, ela precisa se casar com ele para manter o bom nome da família, que está falida. Um dia, desesperada, Rose ameaça se atirar do Titanic, mas Jack consegue demovê-la da ideia. Pelo ato ele é convidado a jantar na primeira classe, onde começa a se tornar mais próximo de Rose. Logo eles se apaixonam, despertando a fúria de Caledon. A situação fica ainda mais complicada quando o Titanic se choca com um iceberg, provocando algo que ninguém imaginava ser possível: o naufrágio do navio. ",
+        sinopse: "Jack e Rose se conhecem durante a viagem inaugural do Titanic. Apesar de virem de mundos diferentes, os dois se apaixonam enquanto o navio enfrenta uma tragédia histórica.",
         diretor: "James Cameron",
         elenco: "Leonardo DiCaprio, Kate Winslet, Billy Zane",
         duracao: "3h 14min"
     }
 ];
 
-// Carregar os filmes cadastrados pelo formulário
-const filmesCadastrados = JSON.parse(
-    localStorage.getItem("filmesCadastrados") || "[]"
-);
 
-// Adicionar os filmes cadastrados ao catálogo
+/* =========================================
+   4. CARREGAR FILMES CADASTRADOS
+========================================= */
+
+function carregarFilmesSalvos() {
+    try {
+        const dados = JSON.parse(
+            localStorage.getItem("filmesCadastrados") || "[]"
+        );
+
+        return Array.isArray(dados) ? dados : [];
+    } catch (erro) {
+        console.error("Erro ao carregar os filmes salvos:", erro);
+        return [];
+    }
+}
+
+const filmesCadastrados = carregarFilmesSalvos();
+
+// Evita duplicar os filmes cadastrados na lista original.
 filmes.push(...filmesCadastrados);
 
 
+/* =========================================
+   5. ELEMENTOS DO CATÁLOGO E FILTROS
+========================================= */
+
 const listaFilmes = document.getElementById("lista-filmes");
-
-
-
 const campoBusca = document.getElementById("buscar-filme");
 const filtroGenero = document.getElementById("filtrar-genero");
 const ordenacao = document.getElementById("ordenar-filmes");
 const quantidadeFilmes = document.getElementById("quantidade-filmes");
-
 const botaoLimparFiltros = document.getElementById("limpar-filtros");
 
 if (botaoLimparFiltros) {
     botaoLimparFiltros.addEventListener("click", function () {
-        campoBusca.value = "";
-        filtroGenero.value = "";
-        ordenacao.value = "";
+        if (campoBusca) campoBusca.value = "";
+        if (filtroGenero) filtroGenero.value = "";
+        if (ordenacao) ordenacao.value = "";
 
         mostrarFilmes();
     });
 }
 
+
+/* =========================================
+   6. EXIBIR FILMES, FILTRAR E ORDENAR
+========================================= */
+
 function mostrarFilmes() {
-    if (!listaFilmes) {
-        return;
-    }
+    if (!listaFilmes) return;
 
     const textoBusca = campoBusca
         ? campoBusca.value.trim().toLowerCase()
@@ -258,21 +278,13 @@ function mostrarFilmes() {
     });
 
     if (ordemSelecionada === "ano-desc") {
-        filmesFiltrados.sort(function (a, b) {
-            return b.ano - a.ano;
-        });
+        filmesFiltrados.sort((a, b) => b.ano - a.ano);
     } else if (ordemSelecionada === "ano-asc") {
-        filmesFiltrados.sort(function (a, b) {
-            return a.ano - b.ano;
-        });
+        filmesFiltrados.sort((a, b) => a.ano - b.ano);
     } else if (ordemSelecionada === "nota-desc") {
-        filmesFiltrados.sort(function (a, b) {
-            return Number(b.nota) - Number(a.nota);
-        });
+        filmesFiltrados.sort((a, b) => Number(b.nota) - Number(a.nota));
     } else if (ordemSelecionada === "nota-asc") {
-        filmesFiltrados.sort(function (a, b) {
-            return Number(a.nota) - Number(b.nota);
-        });
+        filmesFiltrados.sort((a, b) => Number(a.nota) - Number(b.nota));
     }
 
     listaFilmes.innerHTML = "";
@@ -289,6 +301,7 @@ function mostrarFilmes() {
         const mensagem = document.createElement("p");
         mensagem.className = "mensagem-sem-filmes";
         mensagem.textContent = "Nenhum filme encontrado.";
+
         listaFilmes.appendChild(mensagem);
         return;
     }
@@ -297,25 +310,29 @@ function mostrarFilmes() {
         const card = document.createElement("article");
         card.className = "card-filme";
         card.tabIndex = 0;
-card.setAttribute("role", "button");
-card.setAttribute("aria-label", "Ver detalhes de " + filme.titulo);
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", "Ver detalhes de " + filme.titulo);
 
-card.addEventListener("click", function () {
-    abrirDetalhes(filme);
-});
+        card.addEventListener("click", function () {
+            abrirDetalhes(filme);
+        });
 
-card.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        abrirDetalhes(filme);
-    }
-});
+        card.addEventListener("keydown", function (event) {
+            // Evita abrir os detalhes ao usar os botões internos.
+            if (event.target !== card) return;
 
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                abrirDetalhes(filme);
+            }
+        });
+
+        // Pôster
         const poster = document.createElement("div");
         poster.className = "poster-filme";
 
         const imagem = document.createElement("img");
-        imagem.src = filme.poster;
+        imagem.src = filme.poster || "";
         imagem.alt = "Pôster do filme " + filme.titulo;
         imagem.loading = "lazy";
 
@@ -329,6 +346,7 @@ card.addEventListener("keydown", function (event) {
 
         poster.appendChild(imagem);
 
+        // Informações do filme
         const informacoes = document.createElement("div");
         informacoes.className = "info-filme";
 
@@ -342,7 +360,7 @@ card.addEventListener("keydown", function (event) {
         nota.textContent = "★ " + filme.nota + " / 10";
 
         const descricao = document.createElement("p");
-        descricao.textContent = filme.descricao;
+        descricao.textContent = filme.descricao || filme.sinopse || "";
 
         const genero = document.createElement("span");
         genero.className = "genero-filme";
@@ -356,23 +374,26 @@ card.addEventListener("keydown", function (event) {
             genero
         );
 
+        // Área dos botões: só para filmes cadastrados pelo usuário.
+        let acoesFilme = null;
+
         if (filme.id) {
-            const acoesFilme = document.createElement("div");
+            acoesFilme = document.createElement("div");
             acoesFilme.className = "acoes-filme";
 
             const botaoEditar = document.createElement("button");
             botaoEditar.type = "button";
-            botaoEditar.textContent = "Editar";
             botaoEditar.className = "botao-editar";
+            botaoEditar.innerHTML = "✎ Editar";
 
             const botaoExcluir = document.createElement("button");
             botaoExcluir.type = "button";
-            botaoExcluir.textContent = "Excluir";
             botaoExcluir.className = "botao-excluir";
+            botaoExcluir.innerHTML = "▤ Excluir";
 
             botaoEditar.addEventListener("click", function (event) {
-              event.stopPropagation();
-              editarFilme(filme);  
+                event.stopPropagation();
+                editarFilme(filme);
             });
 
             botaoExcluir.addEventListener("click", function (event) {
@@ -380,12 +401,16 @@ card.addEventListener("keydown", function (event) {
                 excluirFilme(filme);
             });
 
-            acoesFilme.appendChild(botaoEditar);
-            acoesFilme.appendChild(botaoExcluir);
+            acoesFilme.append(botaoEditar, botaoExcluir);
+        }
 
-            card.appendChild(acoesFilme);        }
-
+        // Ordem correta: pôster, informações e botões no final.
         card.append(poster, informacoes);
+
+        if (acoesFilme) {
+            card.appendChild(acoesFilme);
+        }
+
         listaFilmes.appendChild(card);
     });
 }
@@ -402,212 +427,308 @@ if (ordenacao) {
     ordenacao.addEventListener("change", mostrarFilmes);
 }
 
+
+/* =========================================
+   7. MODAL DE DETALHES DO FILME
+========================================= */
+
 const modalDetalhes = document.getElementById("modal-detalhes");
 const fecharDetalhes = document.getElementById("fechar-detalhes");
 
-
 function abrirDetalhes(filme) {
-    document.getElementById("detalhe-poster").src = filme.poster || "";
-    document.getElementById("detalhe-poster").alt = "Pôster de " + filme.titulo;
+    if (!modalDetalhes) return;
 
-    document.getElementById("detalhe-genero").textContent = filme.genero;
+    const detalhePoster = document.getElementById("detalhe-poster");
+    const detalheGenero = document.getElementById("detalhe-genero");
+    const detalheTitulo = document.getElementById("detalhe-titulo");
+    const detalheAno = document.getElementById("detalhe-ano");
+    const detalheNota = document.getElementById("detalhe-nota");
+    const detalheDuracao = document.getElementById("detalhe-duracao");
+    const detalheSinopse = document.getElementById("detalhe-sinopse");
+    const detalheDiretor = document.getElementById("detalhe-diretor");
+    const detalheElenco = document.getElementById("detalhe-elenco");
 
-    // Título correto do filme
-    document.getElementById("detalhe-titulo").textContent = filme.titulo;
+    if (detalhePoster) {
+        detalhePoster.src = filme.poster || "";
+        detalhePoster.alt = "Pôster de " + filme.titulo;
+    }
 
-    // Ano de lançamento
-    document.getElementById("detalhe-ano").textContent = "Ano: " + filme.ano;
+    if (detalheGenero) detalheGenero.textContent = filme.genero;
+    if (detalheTitulo) detalheTitulo.textContent = filme.titulo;
+    if (detalheAno) detalheAno.textContent = "Ano: " + filme.ano;
+    if (detalheNota) detalheNota.textContent = "★ " + filme.nota + " / 10";
 
-    // Nota do filme
-    document.getElementById("detalhe-nota").textContent = "★ " + filme.nota + " / 10";
+    if (detalheDuracao) {
+        detalheDuracao.textContent =
+            "Duração: " + (filme.duracao || "Não informada");
+    }
 
-    // Duração
-    document.getElementById("detalhe-duracao").textContent =
-        "Duração: " + (filme.duracao || "Não informada");
+    if (detalheSinopse) {
+        detalheSinopse.textContent = filme.sinopse || filme.descricao || "";
+    }
 
-    // Sinopse
-    document.getElementById("detalhe-sinopse").textContent =
-        filme.sinopse || filme.descricao;
+    if (detalheDiretor) {
+        detalheDiretor.textContent = filme.diretor || "Não informado";
+    }
 
-    // Direção
-    document.getElementById("detalhe-diretor").textContent =
-        filme.diretor || "Não informado";
+    if (detalheElenco) {
+        detalheElenco.textContent = filme.elenco || "Não informado";
+    }
 
-    // Elenco principal
-    document.getElementById("detalhe-elenco").textContent =
-        filme.elenco || "Não informado";
-
-    // Abrir o modal
     modalDetalhes.classList.add("ativo");
 }
 
-
 function fecharJanelaDetalhes() {
-    modalDetalhes.classList.remove("ativo");
+    if (modalDetalhes) {
+        modalDetalhes.classList.remove("ativo");
+    }
 }
 
-fecharDetalhes.addEventListener("click", fecharJanelaDetalhes);
+if (fecharDetalhes) {
+    fecharDetalhes.addEventListener("click", fecharJanelaDetalhes);
+}
 
-modalDetalhes.addEventListener("click", function (event) {
-    if (event.target === modalDetalhes) {
-        fecharJanelaDetalhes();
-    }
-});
+if (modalDetalhes) {
+    modalDetalhes.addEventListener("click", function (event) {
+        if (event.target === modalDetalhes) {
+            fecharJanelaDetalhes();
+        }
+    });
+}
 
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        fecharJanelaDetalhes();
-    }
-});
+
+/* =========================================
+   8. MODAL DE EDIÇÃO
+========================================= */
+
+const modalEdicao = document.getElementById("modal-edicao");
+const formEdicao = document.getElementById("form-edicao");
+const mensagemEdicao = document.getElementById("mensagem-edicao");
+
+let filmeEmEdicao = null;
 
 function editarFilme(filme) {
-    const titulo = prompt("Título do filme:", filme.titulo);
-    if (titulo === null) return;
-
-    const ano = prompt("Ano de lançamento:", filme.ano);
-    if (ano === null) return;
-
-    const genero = prompt("Gênero:", filme.genero);
-    if (genero === null) return;
-
-    const nota = prompt("Nota de 0 a 10:", filme.nota);
-    if (nota === null) return;
-
-    const duracao = prompt("Duração:", filme.duracao || "");
-    if (duracao === null) return;
-
-    const diretor = prompt("Diretor:", filme.diretor || "");
-    if (diretor === null) return;
-
-    const elenco = prompt("Elenco:", filme.elenco || "");
-    if (elenco === null) return;
-
-    const poster = prompt("URL do pôster:", filme.poster || "");
-    if (poster === null) return;
-
-    const sinopse = prompt(
-        "Sinopse:",
-        filme.sinopse || filme.descricao || ""
-    );
-    if (sinopse === null) return;
-
-    if (
-        !titulo.trim() ||
-        !genero.trim() ||
-        !duracao.trim() ||
-        !diretor.trim() ||
-        !elenco.trim() ||
-        !poster.trim() ||
-        !sinopse.trim()
-    ) {
-        alert("Preencha todas as informações.");
+    if (!modalEdicao || !formEdicao) {
+        alert("O modal de edição não foi encontrado no HTML.");
         return;
     }
 
-    const anoNumero = Number(ano);
-    const notaNumero = Number(nota);
+    filmeEmEdicao = filme;
 
-    if (
-        !Number.isInteger(anoNumero) ||
-        anoNumero < 1888 ||
-        anoNumero > 2100
-    ) {
-        alert("Informe um ano válido.");
-        return;
-    }
+    document.getElementById("ed-titulo").value = filme.titulo;
+    document.getElementById("ed-ano").value = filme.ano;
+    document.getElementById("ed-genero").value = filme.genero;
+    document.getElementById("ed-nota").value = filme.nota;
+    document.getElementById("ed-duracao").value = filme.duracao || "";
+    document.getElementById("ed-diretor").value = filme.diretor || "";
+    document.getElementById("ed-elenco").value = filme.elenco || "";
+    document.getElementById("ed-poster").value = filme.poster || "";
+    document.getElementById("ed-sinopse").value =
+        filme.sinopse || filme.descricao || "";
 
-    if (
-        nota.trim() === "" ||
-        !Number.isFinite(notaNumero) ||
-        notaNumero < 0 ||
-        notaNumero > 10
-    ) {
-        alert("A nota deve estar entre 0 e 10.");
-        return;
-    }
+    if (mensagemEdicao) mensagemEdicao.textContent = "";
 
-    // Atualizar os dados do filme
-    filme.titulo = titulo.trim();
-    filme.ano = anoNumero;
-    filme.genero = genero.trim();
-    filme.nota = notaNumero.toFixed(1);
-    filme.duracao = duracao.trim();
-    filme.diretor = diretor.trim();
-    filme.elenco = elenco.trim();
-    filme.poster = poster.trim();
-    filme.sinopse = sinopse.trim();
-    filme.descricao = sinopse.trim();
+    modalEdicao.classList.add("ativo");
+    modalEdicao.setAttribute("aria-hidden", "false");
 
-    // Atualizar os filmes salvos no navegador
-    const filmesSalvos = JSON.parse(
-        localStorage.getItem("filmesCadastrados") || "[]"
-    );
-
-    const indice = filmesSalvos.findIndex(
-        function (item) {
-            return item.id === filme.id;
-        }
-    );
-
-    if (indice === -1) {
-        alert("Não foi possível encontrar o filme salvo.");
-        return;
-    }
-
-    filmesSalvos[indice] = filme;
-
-    localStorage.setItem(
-        "filmesCadastrados",
-        JSON.stringify(filmesSalvos)
-    );
-
-    alert("Filme atualizado com sucesso!");
-
-    mostrarFilmes();
+    document.getElementById("ed-titulo").focus();
 }
+
+function fecharEdicao() {
+    if (!modalEdicao || !formEdicao) return;
+
+    modalEdicao.classList.remove("ativo");
+    modalEdicao.setAttribute("aria-hidden", "true");
+
+    formEdicao.reset();
+
+    if (mensagemEdicao) mensagemEdicao.textContent = "";
+
+    filmeEmEdicao = null;
+}
+
+const botaoFecharEdicao = document.getElementById("fechar-edicao");
+const botaoCancelarEdicao = document.getElementById("cancelar-edicao");
+
+if (botaoFecharEdicao) {
+    botaoFecharEdicao.addEventListener("click", fecharEdicao);
+}
+
+if (botaoCancelarEdicao) {
+    botaoCancelarEdicao.addEventListener("click", fecharEdicao);
+}
+
+if (modalEdicao) {
+    modalEdicao.addEventListener("click", function (event) {
+        if (event.target === modalEdicao) {
+            fecharEdicao();
+        }
+    });
+}
+
+if (formEdicao) {
+    formEdicao.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!filmeEmEdicao) return;
+
+        const titulo = document.getElementById("ed-titulo").value.trim();
+        const anoTexto = document.getElementById("ed-ano").value;
+        const ano = Number(anoTexto);
+        const genero = document.getElementById("ed-genero").value;
+        const notaTexto = document.getElementById("ed-nota").value;
+        const nota = Number(notaTexto);
+        const duracao = document.getElementById("ed-duracao").value.trim();
+        const diretor = document.getElementById("ed-diretor").value.trim();
+        const elenco = document.getElementById("ed-elenco").value.trim();
+        const poster = document.getElementById("ed-poster").value.trim();
+        const sinopse = document.getElementById("ed-sinopse").value.trim();
+
+        if (
+            !titulo || !genero || !duracao || !diretor ||
+            !elenco || !poster || !sinopse
+        ) {
+            mensagemEdicao.textContent = "Preencha todos os campos.";
+            return;
+        }
+
+        if (
+            anoTexto.trim() === "" ||
+            !Number.isInteger(ano) ||
+            ano < 1888 ||
+            ano > 2100
+        ) {
+            mensagemEdicao.textContent = "Informe um ano válido.";
+            return;
+        }
+
+        if (
+            notaTexto.trim() === "" ||
+            !Number.isFinite(nota) ||
+            nota < 0 ||
+            nota > 10
+        ) {
+            mensagemEdicao.textContent = "A nota deve estar entre 0 e 10.";
+            return;
+        }
+
+        let filmesSalvos = carregarFilmesSalvos();
+
+        const indiceSalvo = filmesSalvos.findIndex(function (item) {
+            return item.id === filmeEmEdicao.id;
+        });
+
+        if (indiceSalvo === -1) {
+            mensagemEdicao.textContent =
+                "Não foi possível localizar o filme salvo.";
+            return;
+        }
+
+        const filmeAtualizado = {
+            ...filmeEmEdicao,
+            titulo: titulo,
+            ano: ano,
+            genero: genero,
+            nota: nota.toFixed(1),
+            duracao: duracao,
+            diretor: diretor,
+            elenco: elenco,
+            poster: poster,
+            sinopse: sinopse,
+            descricao: sinopse
+        };
+
+        filmesSalvos[indiceSalvo] = filmeAtualizado;
+
+        try {
+            localStorage.setItem(
+                "filmesCadastrados",
+                JSON.stringify(filmesSalvos)
+            );
+        } catch (erro) {
+            mensagemEdicao.textContent =
+                "Não foi possível salvar as alterações.";
+            return;
+        }
+
+        const indiceCatalogo = filmes.findIndex(function (item) {
+            return item.id === filmeEmEdicao.id;
+        });
+
+        if (indiceCatalogo !== -1) {
+            filmes[indiceCatalogo] = filmeAtualizado;
+        }
+
+        fecharEdicao();
+        mostrarFilmes();
+    });
+}
+
+
+/* =========================================
+   9. EXCLUIR FILMES CADASTRADOS
+========================================= */
 
 function excluirFilme(filme) {
     const confirmar = confirm(
         'Tem certeza que deseja excluir "' + filme.titulo + '"?'
     );
 
-    if (!confirmar) {
+    if (!confirmar) return;
+
+    const filmesSalvos = carregarFilmesSalvos();
+
+    const filmesAtualizados = filmesSalvos.filter(function (item) {
+        return item.id !== filme.id;
+    });
+
+    try {
+        localStorage.setItem(
+            "filmesCadastrados",
+            JSON.stringify(filmesAtualizados)
+        );
+    } catch (erro) {
+        alert("Não foi possível excluir o filme.");
         return;
     }
 
-    const filmesSalvos = JSON.parse(
-        localStorage.getItem("filmesCadastrados") || "[]"
-    );
-
-    const filmesAtualizados = filmesSalvos.filter(
-        function (item) {
-            return item.id !== filme.id;
-        }
-    );
-
-    localStorage.setItem(
-        "filmesCadastrados",
-        JSON.stringify(filmesAtualizados)
-    );
-
-    // Remover o filme também da lista que está na memória
-    const indice = filmes.findIndex(
-        function (item) {
-            return item.id === filme.id;
-        }
-    );
+    const indice = filmes.findIndex(function (item) {
+        return item.id === filme.id;
+    });
 
     if (indice !== -1) {
         filmes.splice(indice, 1);
     }
 
-    alert("Filme excluído com sucesso!");
+    // Fechar os modais caso o filme excluído estivesse aberto.
+    fecharJanelaDetalhes();
+
+    if (filmeEmEdicao && filmeEmEdicao.id === filme.id) {
+        fecharEdicao();
+    }
 
     mostrarFilmes();
 }
 
 
+/* =========================================
+   10. TECLA ESC PARA FECHAR MODAIS
+========================================= */
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        fecharJanelaDetalhes();
+        fecharEdicao();
+
+        if (modalCategorias) {
+            modalCategorias.classList.remove("ativo");
+        }
+    }
+});
+
+
+/* =========================================
+   11. INICIAR CATÁLOGO
+========================================= */
 
 mostrarFilmes();
-
-

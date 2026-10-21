@@ -143,6 +143,26 @@
             </div>
         </div>
     </div>
+
+    <div id="modal-edicao" class="modal-edicao" aria-hidden="true">
+        <section class="conteudo-edicao" role="dialog" aria-modal="true" aria-labelledby="titulo-edicao">
+
+            <div class="cabecalho-edicao">
+                <h2 id="titulo-edicao">Editar filme</h2>
+                <button type="button" id="fechar-edicao" class="fechar-edicao" aria-label="Fechar janela">&times;</button>
+            </div>
+
+            <form id="form-edicao">
+                <div class="grade-edicao">
+
+                    <div class="campo-edicao">
+                        <label for="ed-ano">Ano de lançamento</label>
+                        <input type="number" id="ed-ano" min="1888" max="2100" required>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
     <script src="/FilmZone/JS/script.js"></script>
 </body>
 

@@ -613,33 +613,62 @@ main {
     display: flex;
     gap: 10px;
     padding: 0 15px 15px;
+    margin-top: auto;
 }
 
 .acoes-filme button {
     flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    color: #ffffff;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.acoes-filme button:hover {
+    transform: translateY(-2px);
+}
+
+.acoes-filme button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
 }
 
 .botao-editar {
-    background-color: #45404a;
+    color: #e5dce9;
+    background: linear-gradient(135deg, #302936, #211c27);
+    border-color: #55445e !important;
 }
 
 .botao-editar:hover {
-    background-color: #655967;
-    transform: translateY(-2px);
+    background: #443449;
+    border-color: #a18aab !important;
+    box-shadow: 0 4px 15px rgba(120, 90, 140, 0.2);
 }
 
 .botao-excluir {
-    background-color: #a92543;
+    .botao-excluir {
+    color: #ffffff;
+    background: linear-gradient(135deg, #bd294b, #8d1935);
+    border-color: #d94362 !important;
+}
 }
 
 .botao-excluir:hover {
-    background-color: #d43c5b;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #e33b5d, #b82042);
+    box-shadow: 0 4px 15px rgba(220, 40, 80, 0.25);
+}
+
+.acoes-filme button:active {
+    transform: scale(0.98);
 }
