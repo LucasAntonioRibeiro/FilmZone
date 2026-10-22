@@ -28,15 +28,16 @@ class MobileNavbar {
         this.animateLinks();
     }
 
-    addClickEvent() {
-        this.mobileMenu.addEventListener("click", this.handleClick);
-    }
-
     init() {
         if (this.mobileMenu && this.navList) {
             this.addClickEvent();
         }
+
         return this;
+    }
+
+    addClickEvent() {
+        this.mobileMenu.addEventListener("click", this.handleClick);
     }
 }
 
@@ -55,7 +56,7 @@ mobileNavbar.init();
 
 const abrirCategorias = document.getElementById("abrir-categorias");
 const modalCategorias = document.getElementById("modal-categorias");
-const fecharModal = document.getElementById("fechar-modal");
+const fecharModalCategorias = document.getElementById("fechar-modal");
 
 if (abrirCategorias && modalCategorias) {
     abrirCategorias.addEventListener("click", function (event) {
@@ -64,8 +65,8 @@ if (abrirCategorias && modalCategorias) {
     });
 }
 
-if (fecharModal && modalCategorias) {
-    fecharModal.addEventListener("click", function () {
+if (fecharModalCategorias && modalCategorias) {
+    fecharModalCategorias.addEventListener("click", function () {
         modalCategorias.classList.remove("ativo");
     });
 }
@@ -82,10 +83,12 @@ const categorias = document.querySelectorAll(".categoria");
 const categoriaSelecionada = document.getElementById("categoria-selecionada");
 
 categorias.forEach(function (categoria) {
-    categoria.addEventListener("click", function () {
+    categoria.addEventListener("click", function (event) {
+        event.preventDefault();
+
         const nomeCategoria = this.dataset.categoria;
 
-        if (categoriaSelecionada) {
+        if (categoriaSelecionada && nomeCategoria) {
             categoriaSelecionada.textContent =
                 "Categoria selecionada: " + nomeCategoria;
         }
@@ -213,14 +216,14 @@ function carregarFilmesSalvos() {
 
         return Array.isArray(dados) ? dados : [];
     } catch (erro) {
-        console.error("Erro ao carregar os filmes salvos:", erro);
+        console.error("Erro ao carregar filmes salvos:", erro);
         return [];
     }
 }
 
 const filmesCadastrados = carregarFilmesSalvos();
 
-// Evita duplicar os filmes cadastrados na lista original.
+// Evita duplicar os filmes cadastrados.
 filmes.push(...filmesCadastrados);
 
 
@@ -247,7 +250,280 @@ if (botaoLimparFiltros) {
 
 
 /* =========================================
-   6. EXIBIR FILMES, FILTRAR E ORDENAR
+   6. ELEMENTOS DO MODAL DE DETALHES
+========================================= */
+
+const modalDetalhes = document.getElementById("modal-detalhes");
+const fecharDetalhes = document.getElementById("fechar-detalhes");
+
+function abrirDetalhes(filme) {
+    if (!modalDetalhes) return;
+
+    const detalhePoster = document.getElementById("detalhe-poster");
+    const detalheGenero = document.getElementById("detalhe-genero");
+    const detalheTitulo = document.getElementById("detalhe-titulo");
+    const detalheAno = document.getElementById("detalhe-ano");
+    const detalheNota = document.getElementById("detalhe-nota");
+    const detalheDuracao = document.getElementById("detalhe-duracao");
+    const detalheSinopse = document.getElementById("detalhe-sinopse");
+    const detalheDiretor = document.getElementById("detalhe-diretor");
+    const detalheElenco = document.getElementById("detalhe-elenco");
+
+    if (detalhePoster) {
+        detalhePoster.src = filme.poster || "";
+        detalhePoster.alt = "Pôster de " + filme.titulo;
+        detalhePoster.onerror = function () {
+            this.style.display = "none";
+        };
+        detalhePoster.style.display = "";
+    }
+
+    if (detalheGenero) detalheGenero.textContent = filme.genero || "";
+    if (detalheTitulo) detalheTitulo.textContent = filme.titulo || "";
+    if (detalheAno) detalheAno.textContent = "Ano: " + filme.ano;
+    if (detalheNota) detalheNota.textContent = "★ " + filme.nota + " / 10";
+
+    if (detalheDuracao) {
+        detalheDuracao.textContent =
+            "Duração: " + (filme.duracao || "Não informada");
+    }
+
+    if (detalheSinopse) {
+        detalheSinopse.textContent = filme.sinopse || filme.descricao || "";
+    }
+
+    if (detalheDiretor) {
+        detalheDiretor.textContent = filme.diretor || "Não informado";
+    }
+
+    if (detalheElenco) {
+        detalheElenco.textContent = filme.elenco || "Não informado";
+    }
+
+    modalDetalhes.classList.add("ativo");
+}
+
+function fecharJanelaDetalhes() {
+    if (modalDetalhes) {
+        modalDetalhes.classList.remove("ativo");
+    }
+}
+
+if (fecharDetalhes) {
+    fecharDetalhes.addEventListener("click", fecharJanelaDetalhes);
+}
+
+if (modalDetalhes) {
+    modalDetalhes.addEventListener("click", function (event) {
+        if (event.target === modalDetalhes) {
+            fecharJanelaDetalhes();
+        }
+    });
+}
+
+
+/* =========================================
+   7. ELEMENTOS DO FORMULÁRIO DE EDIÇÃO
+========================================= */
+
+const modalEdicao = document.getElementById("modal-edicao");
+const formEdicao = document.getElementById("form-edicao");
+const botaoFecharEdicao = document.getElementById("fechar-edicao");
+const botaoCancelarEdicao = document.getElementById("cancelar-edicao");
+const mensagemEdicao = document.getElementById("mensagem-edicao");
+
+let filmeEmEdicao = null;
+
+
+/* =========================================
+   8. ABRIR FORMULÁRIO DE EDIÇÃO
+========================================= */
+
+function abrirFormularioEdicao(filme) {
+    if (!modalEdicao || !formEdicao) return;
+
+    filmeEmEdicao = filme;
+
+    document.getElementById("ed-ano").value = filme.ano ?? "";
+    document.getElementById("ed-genero").value = filme.genero || "";
+    document.getElementById("ed-nota").value = filme.nota ?? "";
+    document.getElementById("ed-duracao").value = filme.duracao || "";
+    document.getElementById("ed-diretor").value = filme.diretor || "";
+    document.getElementById("ed-elenco").value = filme.elenco || "";
+    document.getElementById("ed-poster").value = filme.poster || "";
+    document.getElementById("ed-sinopse").value =
+        filme.sinopse || filme.descricao || "";
+
+    if (mensagemEdicao) {
+        mensagemEdicao.textContent = "";
+    }
+
+    modalEdicao.classList.add("ativo");
+    modalEdicao.setAttribute("aria-hidden", "false");
+}
+
+
+/* =========================================
+   9. FECHAR FORMULÁRIO DE EDIÇÃO
+========================================= */
+
+function fecharFormularioEdicao() {
+    if (!modalEdicao) return;
+
+    modalEdicao.classList.remove("ativo");
+    modalEdicao.setAttribute("aria-hidden", "true");
+
+    if (formEdicao) {
+        formEdicao.reset();
+    }
+
+    if (mensagemEdicao) {
+        mensagemEdicao.textContent = "";
+    }
+
+    filmeEmEdicao = null;
+}
+
+if (botaoFecharEdicao) {
+    botaoFecharEdicao.addEventListener(
+        "click",
+        fecharFormularioEdicao
+    );
+}
+
+if (botaoCancelarEdicao) {
+    botaoCancelarEdicao.addEventListener(
+        "click",
+        fecharFormularioEdicao
+    );
+}
+
+if (modalEdicao) {
+    modalEdicao.addEventListener("click", function (event) {
+        if (event.target === modalEdicao) {
+            fecharFormularioEdicao();
+        }
+    });
+}
+
+
+/* =========================================
+   10. SALVAR ALTERAÇÕES DO FILME
+========================================= */
+
+if (formEdicao) {
+    formEdicao.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!filmeEmEdicao) return;
+
+        const anoTexto = document.getElementById("ed-ano").value.trim();
+        const genero = document.getElementById("ed-genero").value;
+        const notaTexto = document.getElementById("ed-nota").value.trim();
+        const duracao = document.getElementById("ed-duracao").value.trim();
+        const diretor = document.getElementById("ed-diretor").value.trim();
+        const elenco = document.getElementById("ed-elenco").value.trim();
+        const poster = document.getElementById("ed-poster").value.trim();
+        const sinopse = document.getElementById("ed-sinopse").value.trim();
+
+        const ano = Number(anoTexto);
+        const nota = Number(notaTexto);
+
+        if (
+            anoTexto === "" ||
+            !Number.isInteger(ano) ||
+            ano < 1888 ||
+            ano > 2100
+        ) {
+            mensagemEdicao.textContent = "Informe um ano válido.";
+            return;
+        }
+
+        if (
+            notaTexto === "" ||
+            !Number.isFinite(nota) ||
+            nota < 0 ||
+            nota > 10
+        ) {
+            mensagemEdicao.textContent =
+                "A nota deve estar entre 0 e 10.";
+            return;
+        }
+
+        if (
+            !genero ||
+            !duracao ||
+            !diretor ||
+            !elenco ||
+            !poster ||
+            !sinopse
+        ) {
+            mensagemEdicao.textContent =
+                "Preencha todos os campos do formulário.";
+            return;
+        }
+
+        if (!filmeEmEdicao.id) {
+            mensagemEdicao.textContent =
+                "Este filme não possui um cadastro editável no navegador.";
+            return;
+        }
+
+        const filmeAtualizado = {
+            ...filmeEmEdicao,
+            ano: ano,
+            genero: genero,
+            nota: nota.toFixed(1),
+            duracao: duracao,
+            diretor: diretor,
+            elenco: elenco,
+            poster: poster,
+            sinopse: sinopse,
+            descricao: sinopse
+        };
+
+        const filmesSalvos = carregarFilmesSalvos();
+
+        const indiceSalvo = filmesSalvos.findIndex(function (item) {
+            return item.id === filmeEmEdicao.id;
+        });
+
+        if (indiceSalvo === -1) {
+            mensagemEdicao.textContent =
+                "Não foi possível localizar o filme salvo.";
+            return;
+        }
+
+        filmesSalvos[indiceSalvo] = filmeAtualizado;
+
+        try {
+            localStorage.setItem(
+                "filmesCadastrados",
+                JSON.stringify(filmesSalvos)
+            );
+        } catch (erro) {
+            console.error("Erro ao salvar alterações:", erro);
+            mensagemEdicao.textContent =
+                "Não foi possível salvar as alterações.";
+            return;
+        }
+
+        const indiceCatalogo = filmes.findIndex(function (item) {
+            return item.id === filmeEmEdicao.id;
+        });
+
+        if (indiceCatalogo !== -1) {
+            filmes[indiceCatalogo] = filmeAtualizado;
+        }
+
+        fecharFormularioEdicao();
+        mostrarFilmes();
+    });
+}
+
+
+/* =========================================
+   11. EXIBIR FILMES, FILTRAR E ORDENAR
 ========================================= */
 
 function mostrarFilmes() {
@@ -266,7 +542,7 @@ function mostrarFilmes() {
         : "";
 
     let filmesFiltrados = filmes.filter(function (filme) {
-        const correspondeTitulo = filme.titulo
+        const correspondeTitulo = (filme.titulo || "")
             .toLowerCase()
             .includes(textoBusca);
 
@@ -318,7 +594,6 @@ function mostrarFilmes() {
         });
 
         card.addEventListener("keydown", function (event) {
-            // Evita abrir os detalhes ao usar os botões internos.
             if (event.target !== card) return;
 
             if (event.key === "Enter" || event.key === " ") {
@@ -374,7 +649,7 @@ function mostrarFilmes() {
             genero
         );
 
-        // Área dos botões: só para filmes cadastrados pelo usuário.
+        // Botões de edição e exclusão para filmes cadastrados.
         let acoesFilme = null;
 
         if (filme.id) {
@@ -384,16 +659,16 @@ function mostrarFilmes() {
             const botaoEditar = document.createElement("button");
             botaoEditar.type = "button";
             botaoEditar.className = "botao-editar";
-            botaoEditar.innerHTML = "✎ Editar";
+            botaoEditar.textContent = "✎ Editar";
 
             const botaoExcluir = document.createElement("button");
             botaoExcluir.type = "button";
             botaoExcluir.className = "botao-excluir";
-            botaoExcluir.innerHTML = "▤ Excluir";
+            botaoExcluir.textContent = "▤ Excluir";
 
             botaoEditar.addEventListener("click", function (event) {
                 event.stopPropagation();
-                editarFilme(filme);
+                abrirFormularioEdicao(filme);
             });
 
             botaoExcluir.addEventListener("click", function (event) {
@@ -404,7 +679,6 @@ function mostrarFilmes() {
             acoesFilme.append(botaoEditar, botaoExcluir);
         }
 
-        // Ordem correta: pôster, informações e botões no final.
         card.append(poster, informacoes);
 
         if (acoesFilme) {
@@ -414,6 +688,11 @@ function mostrarFilmes() {
         listaFilmes.appendChild(card);
     });
 }
+
+
+/* =========================================
+   12. EVENTOS DOS FILTROS
+========================================= */
 
 if (campoBusca) {
     campoBusca.addEventListener("input", mostrarFilmes);
@@ -429,244 +708,7 @@ if (ordenacao) {
 
 
 /* =========================================
-   7. MODAL DE DETALHES DO FILME
-========================================= */
-
-const modalDetalhes = document.getElementById("modal-detalhes");
-const fecharDetalhes = document.getElementById("fechar-detalhes");
-
-function abrirDetalhes(filme) {
-    if (!modalDetalhes) return;
-
-    const detalhePoster = document.getElementById("detalhe-poster");
-    const detalheGenero = document.getElementById("detalhe-genero");
-    const detalheTitulo = document.getElementById("detalhe-titulo");
-    const detalheAno = document.getElementById("detalhe-ano");
-    const detalheNota = document.getElementById("detalhe-nota");
-    const detalheDuracao = document.getElementById("detalhe-duracao");
-    const detalheSinopse = document.getElementById("detalhe-sinopse");
-    const detalheDiretor = document.getElementById("detalhe-diretor");
-    const detalheElenco = document.getElementById("detalhe-elenco");
-
-    if (detalhePoster) {
-        detalhePoster.src = filme.poster || "";
-        detalhePoster.alt = "Pôster de " + filme.titulo;
-    }
-
-    if (detalheGenero) detalheGenero.textContent = filme.genero;
-    if (detalheTitulo) detalheTitulo.textContent = filme.titulo;
-    if (detalheAno) detalheAno.textContent = "Ano: " + filme.ano;
-    if (detalheNota) detalheNota.textContent = "★ " + filme.nota + " / 10";
-
-    if (detalheDuracao) {
-        detalheDuracao.textContent =
-            "Duração: " + (filme.duracao || "Não informada");
-    }
-
-    if (detalheSinopse) {
-        detalheSinopse.textContent = filme.sinopse || filme.descricao || "";
-    }
-
-    if (detalheDiretor) {
-        detalheDiretor.textContent = filme.diretor || "Não informado";
-    }
-
-    if (detalheElenco) {
-        detalheElenco.textContent = filme.elenco || "Não informado";
-    }
-
-    modalDetalhes.classList.add("ativo");
-}
-
-function fecharJanelaDetalhes() {
-    if (modalDetalhes) {
-        modalDetalhes.classList.remove("ativo");
-    }
-}
-
-if (fecharDetalhes) {
-    fecharDetalhes.addEventListener("click", fecharJanelaDetalhes);
-}
-
-if (modalDetalhes) {
-    modalDetalhes.addEventListener("click", function (event) {
-        if (event.target === modalDetalhes) {
-            fecharJanelaDetalhes();
-        }
-    });
-}
-
-
-/* =========================================
-   8. MODAL DE EDIÇÃO
-========================================= */
-
-const modalEdicao = document.getElementById("modal-edicao");
-const formEdicao = document.getElementById("form-edicao");
-const mensagemEdicao = document.getElementById("mensagem-edicao");
-
-let filmeEmEdicao = null;
-
-function editarFilme(filme) {
-    if (!modalEdicao || !formEdicao) {
-        alert("O modal de edição não foi encontrado no HTML.");
-        return;
-    }
-
-    filmeEmEdicao = filme;
-
-    document.getElementById("ed-titulo").value = filme.titulo;
-    document.getElementById("ed-ano").value = filme.ano;
-    document.getElementById("ed-genero").value = filme.genero;
-    document.getElementById("ed-nota").value = filme.nota;
-    document.getElementById("ed-duracao").value = filme.duracao || "";
-    document.getElementById("ed-diretor").value = filme.diretor || "";
-    document.getElementById("ed-elenco").value = filme.elenco || "";
-    document.getElementById("ed-poster").value = filme.poster || "";
-    document.getElementById("ed-sinopse").value =
-        filme.sinopse || filme.descricao || "";
-
-    if (mensagemEdicao) mensagemEdicao.textContent = "";
-
-    modalEdicao.classList.add("ativo");
-    modalEdicao.setAttribute("aria-hidden", "false");
-
-    document.getElementById("ed-titulo").focus();
-}
-
-function fecharEdicao() {
-    if (!modalEdicao || !formEdicao) return;
-
-    modalEdicao.classList.remove("ativo");
-    modalEdicao.setAttribute("aria-hidden", "true");
-
-    formEdicao.reset();
-
-    if (mensagemEdicao) mensagemEdicao.textContent = "";
-
-    filmeEmEdicao = null;
-}
-
-const botaoFecharEdicao = document.getElementById("fechar-edicao");
-const botaoCancelarEdicao = document.getElementById("cancelar-edicao");
-
-if (botaoFecharEdicao) {
-    botaoFecharEdicao.addEventListener("click", fecharEdicao);
-}
-
-if (botaoCancelarEdicao) {
-    botaoCancelarEdicao.addEventListener("click", fecharEdicao);
-}
-
-if (modalEdicao) {
-    modalEdicao.addEventListener("click", function (event) {
-        if (event.target === modalEdicao) {
-            fecharEdicao();
-        }
-    });
-}
-
-if (formEdicao) {
-    formEdicao.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        if (!filmeEmEdicao) return;
-
-        const titulo = document.getElementById("ed-titulo").value.trim();
-        const anoTexto = document.getElementById("ed-ano").value;
-        const ano = Number(anoTexto);
-        const genero = document.getElementById("ed-genero").value;
-        const notaTexto = document.getElementById("ed-nota").value;
-        const nota = Number(notaTexto);
-        const duracao = document.getElementById("ed-duracao").value.trim();
-        const diretor = document.getElementById("ed-diretor").value.trim();
-        const elenco = document.getElementById("ed-elenco").value.trim();
-        const poster = document.getElementById("ed-poster").value.trim();
-        const sinopse = document.getElementById("ed-sinopse").value.trim();
-
-        if (
-            !titulo || !genero || !duracao || !diretor ||
-            !elenco || !poster || !sinopse
-        ) {
-            mensagemEdicao.textContent = "Preencha todos os campos.";
-            return;
-        }
-
-        if (
-            anoTexto.trim() === "" ||
-            !Number.isInteger(ano) ||
-            ano < 1888 ||
-            ano > 2100
-        ) {
-            mensagemEdicao.textContent = "Informe um ano válido.";
-            return;
-        }
-
-        if (
-            notaTexto.trim() === "" ||
-            !Number.isFinite(nota) ||
-            nota < 0 ||
-            nota > 10
-        ) {
-            mensagemEdicao.textContent = "A nota deve estar entre 0 e 10.";
-            return;
-        }
-
-        let filmesSalvos = carregarFilmesSalvos();
-
-        const indiceSalvo = filmesSalvos.findIndex(function (item) {
-            return item.id === filmeEmEdicao.id;
-        });
-
-        if (indiceSalvo === -1) {
-            mensagemEdicao.textContent =
-                "Não foi possível localizar o filme salvo.";
-            return;
-        }
-
-        const filmeAtualizado = {
-            ...filmeEmEdicao,
-            titulo: titulo,
-            ano: ano,
-            genero: genero,
-            nota: nota.toFixed(1),
-            duracao: duracao,
-            diretor: diretor,
-            elenco: elenco,
-            poster: poster,
-            sinopse: sinopse,
-            descricao: sinopse
-        };
-
-        filmesSalvos[indiceSalvo] = filmeAtualizado;
-
-        try {
-            localStorage.setItem(
-                "filmesCadastrados",
-                JSON.stringify(filmesSalvos)
-            );
-        } catch (erro) {
-            mensagemEdicao.textContent =
-                "Não foi possível salvar as alterações.";
-            return;
-        }
-
-        const indiceCatalogo = filmes.findIndex(function (item) {
-            return item.id === filmeEmEdicao.id;
-        });
-
-        if (indiceCatalogo !== -1) {
-            filmes[indiceCatalogo] = filmeAtualizado;
-        }
-
-        fecharEdicao();
-        mostrarFilmes();
-    });
-}
-
-
-/* =========================================
-   9. EXCLUIR FILMES CADASTRADOS
+   13. EXCLUIR FILMES CADASTRADOS
 ========================================= */
 
 function excluirFilme(filme) {
@@ -688,6 +730,7 @@ function excluirFilme(filme) {
             JSON.stringify(filmesAtualizados)
         );
     } catch (erro) {
+        console.error("Erro ao excluir filme:", erro);
         alert("Não foi possível excluir o filme.");
         return;
     }
@@ -700,35 +743,33 @@ function excluirFilme(filme) {
         filmes.splice(indice, 1);
     }
 
-    // Fechar os modais caso o filme excluído estivesse aberto.
-    fecharJanelaDetalhes();
-
     if (filmeEmEdicao && filmeEmEdicao.id === filme.id) {
-        fecharEdicao();
+        fecharFormularioEdicao();
     }
 
+    fecharJanelaDetalhes();
     mostrarFilmes();
 }
 
 
 /* =========================================
-   10. TECLA ESC PARA FECHAR MODAIS
+   14. FECHAR MODAIS COM ESC
 ========================================= */
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        fecharJanelaDetalhes();
-        fecharEdicao();
+    if (event.key !== "Escape") return;
 
-        if (modalCategorias) {
-            modalCategorias.classList.remove("ativo");
-        }
+    fecharJanelaDetalhes();
+    fecharFormularioEdicao();
+
+    if (modalCategorias) {
+        modalCategorias.classList.remove("ativo");
     }
 });
 
 
 /* =========================================
-   11. INICIAR CATÁLOGO
+   15. INICIAR CATÁLOGO
 ========================================= */
 
 mostrarFilmes();

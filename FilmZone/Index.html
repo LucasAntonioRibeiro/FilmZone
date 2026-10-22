@@ -159,6 +159,59 @@
                         <label for="ed-ano">Ano de lançamento</label>
                         <input type="number" id="ed-ano" min="1888" max="2100" required>
                     </div>
+
+                    <div class="campo-edicao">
+                        <label for="ed-genero">Gênero</label>
+                        <select id="ed-genero" required>
+                            <option value="Ação">Ação</option>
+                        <option value="Animação">Animação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Ficção científica">Ficção científica</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Suspense">Suspense</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comédia">Comédia</option>
+                        <option value="Terror">Terror</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-edicao">
+                        <label for="ed-nota">Nota (0 a 10)</label>
+                        <input type="number" id="ed-nota" min="0" max="10" required>
+                    </div>
+
+                    <div class="campo-edicao">
+                        <label for="ed-duracao">Duração</label>
+                        <input type="text" id="ed-duracao" required>
+                    </div>
+
+                    <div class="campo-edicao">
+                        <label for="ed-diretor">Diretor</label>
+                        <input type="text" id="ed-diretor" required>
+                    </div>
+
+                    <div class="campo-edicao">
+                        <label for="ed-elenco">Elenco principal</label>
+                        <input type="text" id="ed-elenco" required>
+                    </div>
+
+                    <div class="campo-edicao campo-largo">
+                        <label for="ed-poster">URL do pôster</label>
+                        <input type="url" id="ed-poster" required>
+                    </div>
+
+                    <div class="campo-edicao campo-largo">
+                        <label for="ed-sinopse">Sinopse</label>
+                        <textarea id="ed-sinopse" rows="5" required></textarea>
+                    </div>
+                </div>
+
+                <p id="mensagem-edicao" role="status"></p>
+
+                <div class="acoes-edicao">
+                    <button type="button" id="cancelar-edicao" class="botao-cancelar">Cancelar</button>
+
+                    <button type="submit" class="botao-salvar">Salvar alterações</button>
                 </div>
             </form>
         </section>
