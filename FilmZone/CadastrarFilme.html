@@ -1,15 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/CadastrarFilme.css">
-    <title>Cadastrar filme | FilmZone</title>
+    <title>Cadastrar | FilmZone</title>
 </head>
+
 <body>
     <header>
         <nav>
             <a class="Logo" href="/">Filme zone</a>
+
             <div class="mobile-menu">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -17,7 +21,7 @@
             </div>
 
             <ul class="nav-list">
-                <li><a href="#">Início</a></li>
+                <li><a href="/">Início</a></li>
                 <li><a href="#" id="abrir-categorias">Categorias</a></li>
                 <li><a href="CadastrarFilme.html">Cadastrar</a></li>
                 <li><a href="Login.html">Login</a></li>
@@ -26,16 +30,23 @@
     </header>
 
     <main class="pagina-cadastro-filme">
-
         <section class="formulario-filme">
-            <p class="subtitulo">EXPANDA SEU UNIVERSO CINEMATROGRÁFICO</p>
 
-            <h1>Cadastrar novo filme</h1>
-            <p>Preencha as informações para adicionar um filme ao catálogo.</p>
+            <p class="subtitulo">EXPANDA SEU UNIVERSO CINEMATOGRÁFICO</p>
+
+            <h1 id="titulo-pagina">Cadastrar novo conteúdo</h1>
+
+            <p>Preencha as informações para adicionar um filme ou série ao catálogo.</p>
 
             <form id="form-cadastro-filme">
 
-                <label for="titulo-filme">Título do filme</label>
+                <label for="tipo-conteudo">Tipo de conteúdo</label>
+                <select id="tipo-conteudo" required>
+                    <option value="Filme">Filme</option>
+                    <option value="Série">Série</option>
+                </select>
+
+                <label for="titulo-filme" id="label-titulo">Título do filme</label>
                 <input type="text" id="titulo-filme" required>
 
                 <label for="ano-filme">Ano de lançamento</label>
@@ -58,28 +69,71 @@
                 <label for="nota-filme">Nota (0 a 10)</label>
                 <input type="number" id="nota-filme" min="0" max="10" step="0.1" required>
 
-                <label for="duracao-filme">Duração</label>
-                <input type="text" id="duracao-filme" placeholder="Ex.: 2h 15min" required>
+                <!-- Campo exclusivo para filmes -->
+                <div id="grupo-duracao">
+                    <label for="duracao-filme">Duração</label>
+                    <input
+                        type="text"
+                        id="duracao-filme"
+                        placeholder="Ex.: 2h 15min"
+                        required
+                    >
+                </div>
 
-                <label for="diretor-filme">Diretor</label>
-                <input type="text" id="diretor-filme"required>
+                <!-- Campos exclusivos para séries -->
+                <div id="grupo-temporadas" hidden>
+                    <label for="temporadas-serie">Quantidade de temporadas</label>
+                    <input
+                        type="number"
+                        id="temporadas-serie"
+                        min="1"
+                        placeholder="Ex.: 3"
+                    >
+                </div>
 
-                <label for="eleco-filme">Elenco do filme</label>
-                <input type="text" id="elenco-filme" placeholder="Separe os nomes por vírgula" required>
+                <div id="grupo-episodios" hidden>
+                    <label for="episodios-serie">Episódios por temporada</label>
+                    <input
+                        type="number"
+                        id="episodios-serie"
+                        min="1"
+                        placeholder="Ex.: 10"
+                    >
+                </div>
+
+                <label for="diretor-filme" id="label-diretor">Diretor</label>
+                <input type="text" id="diretor-filme" required>
+
+                <label for="elenco-filme">Elenco principal</label>
+                <input
+                    type="text"
+                    id="elenco-filme"
+                    placeholder="Separe os nomes por vírgula"
+                    required
+                >
 
                 <label for="poster-filme">URL do pôster</label>
-                <input type="url" id="poster-filme" placeholder="https://..." required>
+                <input
+                    type="url"
+                    id="poster-filme"
+                    placeholder="https://..."
+                    required
+                >
 
                 <label for="sinopse-filme">Sinopse completa</label>
                 <textarea id="sinopse-filme" rows="5" required></textarea>
 
-                <button type="submit">Cadastrar filme</button>
+                <button type="submit" id="botao-cadastrar">
+                    Cadastrar filme
+                </button>
 
                 <p id="mensagem-filme" role="status"></p>
+
             </form>
         </section>
     </main>
 
     <script src="JS/CadasrarFilme.js"></script>
 </body>
+
 </html>

@@ -213,3 +213,7 @@ main {
         font-size: 26px;
     }
 }
+
+[hidden] {
+  display: none !important;
+}
